@@ -15,12 +15,423 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+
+		<style>
+			h6, .stats-row p {
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+			}
+			@keyframes right-pointer-journey {
+			0%    { transform: translateX(0); }
+			17.5% { transform: translateX(2rem); }
+			30%   { transform: translateX(2rem); }
+			71%   { transform: translateX(8rem); }
+			80%   { transform: translateX(8rem); }
+			100%  { transform: translateX(10rem); }
+			}
+			@keyframes right-pointer-expand {
+				from { transform: translateX(10rem); }
+				to   { transform: translateX(16rem); }
+				}
+			@keyframes left-pointer-shrink {
+				from { transform: translateX(0); }
+				to   { transform: translateX(9.5rem); }
+				}
+
+			@keyframes underline-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+			@keyframes fade-in      { from { opacity: 0; } to { opacity: 1; } }
+			@keyframes fade-out     { from { opacity: 1; } to { opacity: 0; } }
+			@keyframes underline-out { from { opacity: 1; } to { opacity: 0; } }
+			.title-block {
+			position: relative;
+			top: -7rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			}
+
+			.stats-row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			align-items: center;
+			width: 100%;
+			margin-top: 1.5rem;
+			gap: 2rem;
+			}
+
+			.stats-row .stat {
+			flex: 1;
+			text-align: center;
+			}
+			#cell0, #cell1, #cell2, #cell3, #cell4, #cell5,
+			#cell6, #cell7, #cell8 { position: relative; }
+
+			#cell0::after, #cell1::after, #cell2::after,
+			#cell3::after, #cell4::after, #cell5::after,
+			#cell6::after, #cell7::after, #cell8::after {
+			content: "";
+			position: absolute;
+			left: 0; right: 0; bottom: -0.05em;
+			height: 0.1em;
+			background: #ffd166;
+			transform: scaleX(0);
+			transform-origin: left center;
+			animation: underline-in 0.3s ease-out forwards;
+			}
+			#cell0::after {
+				animation: underline-in 0.3s ease-out 2.2s forwards,
+							underline-out 0.4s ease-out 11.3s forwards;
+				}
+			#cell1::after {
+				animation: underline-in 0.3s ease-out 2.2s forwards,
+							underline-out 0.4s ease-out 11.5s forwards;
+				}
+			#cell2::after {
+				animation: underline-in 0.3s ease-out 3.6s forwards,
+							underline-out 0.4s ease-out 11.7s forwards;
+				}
+			#cell3::after {
+				animation: underline-in 0.3s ease-out 5.1s forwards,
+							underline-out 0.4s ease-out 11.9s forwards;
+				}
+			#cell4::after { animation-delay: 6.5s; }
+			#cell5::after { animation-delay: 8.8s; }
+			#cell6::after { animation-delay: 14.0s; }
+			#cell7::after { animation-delay: 14.8s; }
+			#cell8::after { animation-delay: 15.5s; }
+
+			.count-swap { position: relative; display: inline-block; min-width: 1ch; }
+			.c1, .c2, .c3 { position: absolute; left: 0; opacity: 0; }
+
+			.c0 { animation: fade-out 0.25s ease-out 2.6s forwards;
+				color: #cbd5e1;
+			}
+
+			.c1 {
+				animation: fade-in  0.25s ease-out 2.6s forwards,
+							fade-out 0.25s ease-out 6.9s forwards;
+				color:  #96e6a1;
+			}
+
+			.c2 {
+				animation: fade-in  0.25s ease-out 6.9s  forwards,
+							fade-out 0.25s ease-out 9.2s  forwards,
+							fade-in  0.25s ease-out 11.6s forwards,
+							fade-out 0.25s ease-out 15.7s forwards;
+				color: #ffd166;
+			}
+			.c3 {
+				animation: fade-in  0.25s ease-out 9.2s  forwards,
+							fade-out 0.25s ease-out 11.6s forwards,
+							fade-in  0.25s ease-out 15.7s forwards;
+				color: #ffe066;
+				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
+			}
+
+			.array-row,
+			.pointer-row {
+			display: grid;
+			grid-template-columns: 1rem repeat(9, 2rem) 1rem;
+			justify-content: center;
+			align-items: center;
+			font-family: monospace;
+			font-size: 3rem;
+			}
+
+			.array-row > span,
+			.pointer-row > span {
+			text-align: center;
+			line-height: 1;
+			}
+
+			.pointer-row {
+			margin-top: 0.25rem;
+			font-size: 5rem;
+			}
+
+			.arrow-left {
+			color: #96e6a1;
+			font-weight: bold;
+			font-size: 5rem;
+			display: inline-block;
+			animation: left-pointer-shrink 1s ease-in-out 11.2s forwards;
+			}
+			.arrow-right {
+			color: #ffd166;
+			font-weight: bold;
+			font-size: 5rem;
+			display: inline-block;
+			animation: right-pointer-journey 8s   ease-in-out 0.8s  forwards,
+						right-pointer-expand  2.5s ease-in-out 13.0s forwards;
+			}
+
+			.results-swap {
+				display: inline-grid;
+				}
+			.results-swap > span {
+				grid-area: 1 / 1;
+				}
+			.r2, .r3 { opacity: 0; }
+			.r1 { animation: fade-out 0.3s ease-out 9.5s forwards; }
+			.r2 {
+				animation: fade-in  0.3s ease-out 9.5s  forwards,
+							fade-out 0.3s ease-out 16.0s forwards;
+				color: #96e6a1;
+				}
+			.r3 {
+				animation: fade-in  0.3s ease-out 16.0s forwards;
+				color: #96e6a1;
+				}
+
+			.instructionsSwap {
+				display: grid;
+				justify-items: center;
+				text-align: center;
+				margin-top: 1rem;
+				color: #f0fdf4;
+				text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+				}
+			.instructionsSwap > span {
+				grid-area: 1 / 1;
+				}
+			.i1 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 0s   forwards,
+							fade-out 0.3s ease-out 8.5s forwards;
+				}
+			.i2 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 8.5s  forwards,
+							fade-out 0.3s ease-out 10.8s forwards;
+				}
+			.i3 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 10.8s forwards,
+							fade-out 0.3s ease-out 14.8s forwards;
+				}
+			.i4 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 14.8s forwards,
+							fade-out 0.3s ease-out 18.5s forwards;
+				}
+			.i5 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 18.5s forwards,
+							fade-out 0.3s ease-out 22.5s forwards;
+				}
+			.i6 {
+				opacity: 0;
+				animation: fade-in  0.3s ease-out 22.5s forwards;
+				}
+
+			.codeSwap {
+			display: grid;
+			justify-items: center;
+			margin-top: 1.2rem;
+			width: 100%;
+			}
+
+			.codeSwap > code {
+			grid-area: 1 / 1;
+			opacity: 0;
+			font-family: monospace;
+			font-size: 0.62em;
+			white-space: pre;
+			text-align: left;
+			background: rgba(0, 0, 0, 0.42);
+			color: #f8fafc;
+			padding: 0.7rem 1rem;
+			border-radius: 0.5rem;
+			line-height: 1.35;
+			max-width: 900px;
+			width: 100%;
+			text-shadow: none;
+			}
+			.codeSwap > pre {
+			grid-area: 1 / 1;
+			opacity: 0;
+			margin: 0;
+			width: 100%;
+			max-width: 900px;
+			}
+			.codeSwap pre code {
+			font-size: 0.62em;
+			line-height: 1.35;
+			padding: 0.7rem 1rem;
+			border-radius: 0.5rem;
+			}
+
+			.cs1 { animation: fade-in 0.3s ease-out  0.0s forwards, fade-out 0.3s ease-out  8.5s forwards; }
+			.cs2 { animation: fade-in 0.3s ease-out  8.5s forwards, fade-out 0.3s ease-out 10.8s forwards; }
+			.cs3 { animation: fade-in 0.3s ease-out 10.8s forwards, fade-out 0.3s ease-out 14.8s forwards; }
+			.cs4 { animation: fade-in 0.3s ease-out 14.8s forwards, fade-out 0.3s ease-out 18.5s forwards; }
+			.cs5 { animation: fade-in 0.3s ease-out 18.5s forwards, fade-out 0.3s ease-out 22.5s forwards; }
+			.cs6 { animation: fade-in 0.3s ease-out 22.5s forwards; }
+
+			.reveal section.code-slide {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			}
+
+			.reveal section.code-slide pre {
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			}
+
+			.reveal section.code-slide pre code {
+			font-size: 0.48em;
+			line-height: 1.35;
+			max-height: none;
+			padding: 1rem 1.25rem;
+			width: 100%;
+			box-sizing: border-box;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-background-gradient="linear-gradient(to bottom, #064e3b, #34d399)">
+					<div class="title-block">
+						<h6>Sliding Window Technique to Solve Leetcode 2904</h6>
+						<h6>Return the Smallest Substring with K amount of "1's"</h6>
+						<div class="stats-row">
+						<div class="stat"><p>K = 3</p></div>
+						<div class="stat">
+						<p>
+							<span class="results-swap">
+								<span class="r1">results = []</span>
+								<span class="r2">results = [100011]</span>
+								<span class="r3">results = [100011,11001]</span>
+							</span>
+						</p>
+						</div>
+
+						<div class="stat"><p>count = <span class="count-swap">
+						<span class="c0">0</span><span class="c1">1</span>
+						<span class="c2">2</span><span class="c3">3</span>
+						</span></p></div>
+					</div>
+					<div class="array-row">
+					<span>[</span>
+					<span id="cell0">1</span><span id="cell1">0</span>
+					<span id="cell2">0</span><span id="cell3">0</span>
+					<span id="cell4">1</span><span id="cell5">1</span>
+					<span id="cell6">0</span><span id="cell7">0</span>
+					<span id="cell8">1</span>
+					<span>]</span>
+					</div>
+					<div class="pointer-row">
+					<span class="arrow arrow-left">↑</span>
+					<span class="arrow arrow-right">↑</span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					</div>
+
+					<p class="instructionsSwap"><span class="i1">Create two pointers and loop through the string. Until count = K</span>
+						<span class="i2">When count = k push the substring up to the array</span>
+						<span class="i3">Shrink the window by moving Left Pointer down until we hit a "1"</span>
+						<span class="i4">Expand the window until K=count</span>
+						<span class="i5">Push substring up to array</span>
+						<span class="i6">Use Reduce to find the smallest string in results</span>
+					</p>
+					<div class="codeSwap">
+						<pre class="cs1"><code class="language-javascript">
+						let count = 0;
+						let left = 0;
+						let results = [];
+						// make a loop here with right pointer
+						for (let right = 0; right>s.length; right++) {
+						}</code></pre>
+
+						<pre class="cs2"><code class="language-javascript">	if (s[right] === "1") {
+								count++;
+							}
+
+							while (count === k) {
+								while (s[left] === "0") {
+									left++;
+								}
+								let sub = s.slice(left, right + 1);
+								results.push(sub);
+
+								count--;
+								left++;
+							}
+						</code></pre>
+						<pre class="cs3"><code class="language-javascript">
+							while (s[left] === "0") {
+									left++;
+								}</code></pre>
+
+						<pre class="cs4"><code class="language-javascript">
+							if (s[right] === "1") {
+								count++;
+							}
+
+							while (count === k) {
+								while (s[left] === "0") {
+									left++;
+								}
+								let sub = s.slice(left, right + 1);
+								results.push(sub);
+
+								count--;
+								left++;
+							}
+						</code></pre>
+						<pre class="cs5"><code class="language-javascript">
+								let sub = s.slice(left, right + 1);
+								results.push(sub);
+						</code></pre>
+						<pre class="cs6"><code class="language-javascript">						return results.reduce((shortest, curr) => {
+							if (curr.length &lt; shortest.length) return curr;
+							if (curr.length &gt; shortest.length) return shortest;
+							return curr &lt; shortest ? curr : shortest;
+						});</code></pre>
+					</div>
+				</section>
+
+				<section class="code-slide" data-background-color="#0d1117">
+					<pre><code class="language-javascript" data-trim>var shortestBeautifulSubstring = function(s, k) {
+						let count = 0;
+						let left = 0;
+						let results = [];
+
+						for (let right = 0; right &lt; s.length; right++) {
+							if (s[right] === "1") {
+								count++;
+							}
+
+							while (count === k) {
+								while (s[left] === "0") {
+									left++;
+								}
+								let sub = s.slice(left, right + 1);
+								results.push(sub);
+
+								count--;
+								left++;
+							}
+						}
+						if (results.length === 0) return "";
+
+						return results.reduce((shortest, curr) => {
+							if (curr.length &lt; shortest.length) return curr;
+							if (curr.length &gt; shortest.length) return shortest;
+							return curr &lt; shortest ? curr : shortest;
+						});
+					};</code></pre>
+				</section>
 			</div>
 		</div>
 
@@ -29,13 +440,8 @@
 		<script src="dist/plugin/markdown.js"></script>
 		<script src="dist/plugin/highlight.js"></script>
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
 			});
 		</script>
