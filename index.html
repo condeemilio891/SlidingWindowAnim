@@ -15,12 +15,353 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+
+		<!-- Move to stylesheet -->
+		<style>
+			html:not(.playing) .reveal *,
+			html:not(.playing) .reveal *::before,
+			html:not(.playing) .reveal *::after {
+			animation: none !important;
+			}
+			h6, .stats-row p {
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+			}
+/* keyframes  */
+			@keyframes left-pointer-journey {
+				0%   { transform: translateX(0); }       /* index 0 */
+				15%  { transform: translateX(2rem); }    /* index 1 */
+				30%  { transform: translateX(2rem); }    /* pause: check a==a */
+				45%  { transform: translateX(4rem); }    /* index 2 */
+				60%  { transform: translateX(4rem); }    /* pause: check c==c */
+				75%  { transform: translateX(6rem); }    /* index 3 — middle */
+				100% { transform: translateX(6rem); }    /* hold */
+			}
+
+			@keyframes right-pointer-journey {
+				0%   { transform: translateX(0); }       /* index 6 */
+				15%  { transform: translateX(-2rem); }   /* index 5 */
+				30%  { transform: translateX(-2rem); }   /* pause: check r==r */
+				45%  { transform: translateX(-4rem); }   /* index 4 */
+				60%  { transform: translateX(-4rem); }   /* pause: check a==a */
+				75%  { transform: translateX(-6rem); }   /* index 3 — middle */
+				100% { transform: translateX(-6rem); }   /* hold */
+			}
+			@keyframes left-pointer-journey-2 {
+				0%   { transform: translateX(0); }       /* index 0: g */
+				20%  { transform: translateX(2rem); }    /* index 1: n */
+				40%  { transform: translateX(2rem); }    /* pause: n==n */
+				70%  { transform: translateX(4rem); }    /* index 2: a */
+				100% { transform: translateX(4rem); }    /* STOP — mismatch */
+			}
+
+			@keyframes right-pointer-journey-2 {
+				0%   { transform: translateX(0); }       /* index 6: g */
+				20%  { transform: translateX(-2rem); }   /* index 5: n */
+				40%  { transform: translateX(-2rem); }   /* pause: n==n */
+				70%  { transform: translateX(-4rem); }   /* index 4: i */
+				100% { transform: translateX(-4rem); }   /* STOP — mismatch */
+			}
+			@keyframes fade-in      { from { opacity: 0; } to { opacity: 1; } }
+			@keyframes fade-out     { from { opacity: 1; } to { opacity: 0; } }
+
+			.title-block {
+			
+			position: relative;
+			top: -1rem; /* adjust */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			}
+
+			.stats-row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly; /* or space-around / space-between */
+			align-items: center;
+			width: 100%;
+			margin-top: 1.5rem;
+			gap: 2rem; /* optional */
+			}
+
+			.stats-row .stat {
+			flex: 1; /* equal width columns */
+			text-align: center;
+			}
+
+			.stats-row2 {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				align-items: center;
+				width: 100%;
+				margin-top: 1rem;
+				gap: 2rem;
+			}
+			.stats-row2 .stat2 {
+				flex: 1;
+				text-align: center;
+			}
+
+
+			/* Underline the window cells once the arrow lands */
+			#cell0, #cell1, #cell2, #cell3, #cell4, #cell5,
+			#cell6, #cell7, #cell8 { position: relative; }
+
+			#cell0::after, #cell1::after, #cell2::after,
+			#cell3::after, #cell4::after, #cell5::after,
+			#cell6::after, #cell7::after, #cell8::after {
+			content: "";
+			position: absolute;
+			left: 0; right: 0; bottom: -0.05em;
+			height: 0.1em;
+			background: #ffd166;
+			transform: scaleX(0);
+			transform-origin: left center;
+			}
+			#cell4::after { animation-delay: 6.5s; }
+			#cell5::after { animation-delay: 8.8s; } 
+			#cell6::after { animation-delay: 14.0s; }
+			#cell7::after { animation-delay: 14.8s; }
+			#cell8::after { animation-delay: 15.5s; }
+
+			/* swap count var */
+			.count-swap { position: relative; display: inline-block; min-width: 1ch; }
+			.c1, .c2, .c3 { position: absolute; left: 0; opacity: 0; }
+			.d1, .d2, .d3 { position: absolute; left: 0; opacity: 0; }
+			.c0 {
+				color: #51FF0D;
+				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
+				animation: fade-out 0.3s ease-out 1.9s forwards;
+			}
+
+			.c1 {
+				color: #51FF0D;
+				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
+				animation: fade-in  0.3s ease-out 1.9s forwards,
+						fade-out 0.3s ease-out 4.9s forwards;
+			}
+
+			.c2 {
+				color: #51FF0D;
+				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
+				animation: fade-in  0.3s ease-out 4.9s forwards,
+						fade-out 0.3s ease-out 7.9s forwards;
+			}
+
+			.c3 {
+				color: #51FF0D;
+				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
+				animation: fade-in  0.3s ease-out 7.9s forwards;
+			}
+
+			.d0 { 
+					color: #51FF0D;
+					animation: fade-out 0.3s ease-out 1.9s forwards; }
+
+			.d1 {
+					color: #51FF0D;
+					animation: fade-in  0.3s ease-out 1.9s forwards,
+						fade-out 0.3s ease-out 4.9s forwards;
+			}
+
+			.d2 {
+					color: #f87171;
+					animation: fade-in  0.3s ease-out 4.9s forwards,
+						fade-out 0.3s ease-out 6.1s forwards;
+			}
+
+			.d3 {
+				color: #f87171;
+				text-shadow: 0 0 12px rgba(248, 113, 113, 0.55);
+				animation: fade-in  0.3s ease-out 6.1s forwards;
+			}
+
+			.array-row,
+			.pointer-row {
+			display: grid;
+			grid-template-columns: 1rem repeat(7, 2rem) 1rem; /* brackets +  7 cells */
+			justify-content: center;
+			align-items: center;
+			font-family: monospace;
+			font-size: 3rem;
+			}
+
+			.array-row > span,
+			.pointer-row > span {
+			text-align: center;
+			line-height: 1;
+			}
+
+			.pointer-row {
+			margin-top: 0.25rem;
+			font-size: 5rem;
+			}
+			.array-row2,
+			.pointer-row2 {
+				display: grid;
+				grid-template-columns: 1rem repeat(7, 2rem) 1rem;
+				justify-content: center;
+				align-items: center;
+				font-family: monospace;
+				font-size: 3rem;
+			}
+
+			.array-row2 > span,
+			.pointer-row2 > span {
+				text-align: center;
+				line-height: 1;
+			}
+
+			.pointer-row2 {
+				margin-top: 0.25rem;
+				font-size: 5rem;
+			}
+
+			.arrow-left {
+				color: #96e6a1;
+				font-weight: bold;
+				font-size: 5rem;
+				display: inline-block;
+				animation: left-pointer-journey 10s ease-in-out 0.5s forwards;
+			}		
+			.arrow-right {
+				color: #ffd166;
+				font-weight: bold;
+				font-size: 5rem;
+				display: inline-block;
+				animation: right-pointer-journey 10s ease-in-out 0.5s forwards;
+			}
+			.arrow-left2 {
+				color: #96e6a1;
+				font-weight: bold;
+				font-size: 5rem;
+				display: inline-block;
+				animation: left-pointer-journey-2 8s ease-in-out 0.5s forwards;  /* was 11s */
+			}
+
+			.arrow-right2 {
+				color: #ffd166;
+				font-weight: bold;
+				font-size: 5rem;
+				display: inline-block;
+				animation: right-pointer-journey-2 8s ease-in-out 0.5s forwards;  /* was 11s */
+			}
+
+
+
+
+			/* Slide 2 code fills the slide */
+				.reveal section.code-slide {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				}
+
+				.reveal section.code-slide pre {
+				width: 100%;
+				max-width: 100%;
+				margin: 0;
+				}
+
+				.reveal section.code-slide pre code {
+				font-size: 0.48em;        /* tune: 0.4em small → 0.55em big */
+				line-height: 1.35;
+				max-height: none;         /* kills the scrollbar */
+				padding: 1rem 1.25rem;
+				width: 100%;
+				box-sizing: border-box;
+				}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
+					<div class="title-block">
+						<h6 style="color: #ffd166;">Problem Solving Methods: 2 Pointers</h6>
+						<h6 style="color:#96e6a1">Valid Palindrome</h6>
+					</div>
+					<!-- array row -->
+					<div class="array-row">
+					<span>[</span>
+					<span id="cell0">r</span><span id="cell1">a</span>
+					<span id="cell2">c</span><span id="cell3">e</span>
+					<span id="cell4">c</span><span id="cell5">a</span>
+					<span id="cell6">r</span>	
+					<span>]</span>
+					</div>
+					<!-- pointer row -->
+					<div class="pointer-row">
+					<span></span>                          <!-- bracket col -->
+					<span class="arrow arrow-left">↑</span>           <!-- index 0 → 1 -->
+					<span></span>                          <!-- index 1 -->
+					<span></span>                          <!-- index 2 -->
+					<span></span>                          <!-- index 3 -->
+					<span></span>                          <!-- index 4 -->
+					<span></span>                          <!-- index 5 -->
+					<span class="arrow arrow-right">↑</span>           <!-- index 6 -->
+
+					<span></span>                          <!-- bracket col -->
+					</div>
+					<!-- Stats Row -->
+					<div class="stats-row">
+						<div class="stat"><p>Left Pointer= <span class="count-swap">
+						<span class="c0">r</span><span class="c1">a</span>
+						<span class="c2">c</span><span class="c3">e</span>
+						</span></p></div>
+						<!-- results arr -->
+						<div class="stat">
+						</div>
+
+						<div class="stat"><p>Right Pointer= <span class="count-swap">
+						<span class="c0">r</span><span class="c1">a</span>
+						<span class="c2">c</span><span class="c3">e</span>
+						</span></p></div>
+					</div>
+
+
+
+
+
+					<!-- col 2 -->
+					 <h6 style="color:#f87171;">Invalid Palindrome</h6>
+					<div class="array-row2">
+						
+					<span>[</span>
+						<span id="cell2-0">g</span><span id="cell2-1">n</span>
+						<span id="cell2-2">a</span><span id="cell2-3">w</span>
+						<span id="cell2-4">i</span><span id="cell2-5">n</span>
+						<span id="cell2-6">g</span>
+					<span>]</span>
+					</div>
+
+					<!-- pointer row -->
+					<div class="pointer-row2">
+					<span></span>                          <!-- bracket col -->
+						<span class="arrow arrow-left2 ">↑</span>           <!-- index 0 → 1 -->
+						<span></span>                          <!-- index 1 -->
+						<span></span>                          <!-- index 2 -->
+						<span></span>                          <!-- index 3 -->
+						<span></span>                          <!-- index 4 -->
+						<span></span>                          <!-- index 5 -->
+					<span class="arrow arrow-right2">↑</span>           <!-- index 6 -->
+
+					<span></span>                          <!-- bracket col -->
+					</div>
+					<!-- Stats Row -->
+					<div class="stats-row2">
+					<div class="stat2"><p>Left Pointer= <span class="count-swap">
+						<span class="d0">g</span><span class="d1">n</span>
+						<span class="d2">a</span><span class="d3">✗</span>
+					</span></p></div>
+
+					<div class="stat2"><p>Right Pointer= <span class="count-swap">
+						<span class="d0">g</span><span class="d1">n</span>
+						<span class="d2">i</span><span class="d3">✗</span>
+					</span></p></div>
+				</section>
+
+					
 			</div>
 		</div>
 
@@ -38,6 +379,24 @@
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
 			});
+		</script>
+		<script >
+
+			const LOOP_MS = 10000;   // 25s per cycle — tune below
+
+				function replay() {
+				const root = document.documentElement;
+				root.classList.remove('playing');
+				void root.offsetWidth;        // force reflow so the browser sees the change
+				root.classList.add('playing');
+				}
+
+				// Kick it off after Reveal has rendered the first slide
+				Reveal.on('ready', () => {
+				replay();
+				setInterval(replay, LOOP_MS);
+				});
+
 		</script>
 	</body>
 </html>
