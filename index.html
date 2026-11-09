@@ -64,6 +64,23 @@
 			@keyframes fade-in      { from { opacity: 0; } to { opacity: 1; } }
 			@keyframes fade-out     { from { opacity: 1; } to { opacity: 0; } }
 
+
+
+			@keyframes ptr-l-journey {
+				0%, 5%    { transform: translateX(0); }
+				10%, 100% { transform: translateX(2.5rem); }   /* index 0 → 1 */
+			}
+
+			@keyframes ptr-r-journey {
+				0%, 15%   { transform: translateX(0); }
+				20%, 30%  { transform: translateX(-2.5rem); }  /* 7 → 6 */
+				35%, 45%  { transform: translateX(-5rem); }    /* 6 → 5 */
+				50%, 60%  { transform: translateX(-7.5rem); }  /* 5 → 4 */
+				65%, 75%  { transform: translateX(-10rem); }   /* 4 → 3 */
+				80%, 90%  { transform: translateX(-12.5rem); } /* 3 → 2 */
+				95%, 100% { transform: translateX(-15rem); }   /* 2 → 1 */
+			}
+
 			.title-block {
 			
 			position: relative;
@@ -72,7 +89,14 @@
 			flex-direction: column;
 			align-items: center;
 			}
-
+			.title-block2 {
+			
+			position: relative;
+			top: -7rem; /* adjust */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			}
 			.stats-row {
 			display: flex;
 			flex-direction: row;
@@ -128,6 +152,8 @@
 			.count-swap { position: relative; display: inline-block; min-width: 1ch; }
 			.c1, .c2, .c3 { position: absolute; left: 0; opacity: 0; }
 			.d1, .d2, .d3 { position: absolute; left: 0; opacity: 0; }
+			.a1, .a2, .a3, .a4, .a5, .a6, .a7 { position: absolute; left: 0; opacity: 0; }
+			.b1, .b2 { position: absolute; left: 0; opacity: 0; }
 			.c0 {
 				color: #51FF0D;
 				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
@@ -271,6 +297,73 @@
 				width: 100%;
 				box-sizing: border-box;
 				}
+				.container-viz {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					margin: 1rem 0;
+				}
+
+				.ptr-row,
+				.bar-row {
+					display: grid;
+					grid-template-columns: repeat(8, 2.5rem);
+					justify-content: center;
+				}
+
+				.ptr-row {
+					font-size: 2rem;
+					margin-bottom: -0.4rem;
+				}
+
+				.ptr {
+					display: inline-block;
+					text-align: center;
+					font-weight: bold;
+				}
+
+				.ptr-l {
+					color: #96e6a1;
+					animation: ptr-l-journey 10s ease-in-out 0.5s forwards;
+				}
+
+				.ptr-r {
+					color: #ffd166;
+					animation: ptr-r-journey 10s ease-in-out 0.5s forwards;
+				}
+
+				.bar-row {
+					height: 7.5rem;
+					align-items: end;
+					border-bottom: 2px solid #334155;
+					padding-bottom: 0.2rem;
+				}
+
+				.bar {
+					width: 1.8rem;
+					justify-self: center;
+					background: linear-gradient(to top, #0e6b6b, #34d399);
+					border-radius: 3px 3px 0 0;
+					display: flex;
+					justify-content: center;
+					align-items: flex-end;
+					padding-bottom: 0.15rem;
+					color: #fff;
+					font-family: monospace;
+					font-size: 0.75rem;
+				}
+				.a0 { opacity: 1; animation: fade-out 0.2s ease-out 0.9s forwards; }
+				.a1 { animation: fade-in 0.2s ease-out 0.9s forwards, fade-out 0.2s ease-out 1.9s forwards; }
+				.a2 { animation: fade-in 0.2s ease-out 1.9s forwards, fade-out 0.2s ease-out 3.4s forwards; }
+				.a3 { animation: fade-in 0.2s ease-out 3.4s forwards, fade-out 0.2s ease-out 4.9s forwards; }
+				.a4 { animation: fade-in 0.2s ease-out 4.9s forwards, fade-out 0.2s ease-out 6.4s forwards; }
+				.a5 { animation: fade-in 0.2s ease-out 6.4s forwards, fade-out 0.2s ease-out 7.9s forwards; }
+				.a6 { animation: fade-in 0.2s ease-out 7.9s forwards, fade-out 0.2s ease-out 9.4s forwards; }
+				.a7 { animation: fade-in 0.2s ease-out 9.4s forwards; }
+
+				.b0 { opacity: 1; animation: fade-out 0.2s ease-out 0.9s forwards; }
+				.b1 { animation: fade-in 0.2s ease-out 0.9s forwards, fade-out 0.2s ease-out 1.9s forwards; }
+				.b2 { color: #51FF0D; animation: fade-in 0.2s ease-out 1.9s forwards; }
 		</style>
 	</head>
 	<body>
@@ -361,6 +454,55 @@
 					</span></p></div>
 				</section>
 
+
+
+
+
+
+				<!-- slide 2 -->
+				<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
+					<div class="title-block2">
+						<h6 style="color: #ffd166;">Problem Solving Methods: 2 Pointers</h6>
+						<h6 style="color:#96e6a1">Container With The Most Water</h6>
+					</div>
+
+					<div class="container-viz">
+						<div class="ptr-row">
+							<span class="ptr ptr-l">↓</span>
+							<span></span><span></span><span></span><span></span>
+							<span></span><span></span>
+							<span class="ptr ptr-r">↓</span>
+						</div>
+						<div class="bar-row">
+							<div class="bar" style="height: 1rem;"><span>1</span></div>
+							<div class="bar" style="height: 7rem;"><span>7</span></div>
+							<div class="bar" style="height: 2rem;"><span>2</span></div>
+							<div class="bar" style="height: 5rem;"><span>5</span></div>
+							<div class="bar" style="height: 4rem;"><span>4</span></div>
+							<div class="bar" style="height: 7rem;"><span>7</span></div>
+							<div class="bar" style="height: 3rem;"><span>3</span></div>
+							<div class="bar" style="height: 6rem;"><span>6</span></div>
+						</div>
+					</div>
+
+					<div class="stats-row">
+						<div class="stat"><p>Area = <span class="count-swap">
+							<span class="a0">—</span>
+							<span class="a1">7</span>
+							<span class="a2">36</span>
+							<span class="a3">15</span>
+							<span class="a4">28</span>
+							<span class="a5">12</span>
+							<span class="a6">10</span>
+							<span class="a7">2</span>
+						</span></p></div>
+						<div class="stat"><p>Max = <span class="count-swap">
+							<span class="b0">0</span>
+							<span class="b1">7</span>
+							<span class="b2">36</span>
+						</span></p></div>
+					</div>
+				</section>
 					
 			</div>
 		</div>
