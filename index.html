@@ -80,6 +80,25 @@
 				80%, 90%  { transform: translateX(-12.5rem); } /* 3 → 2 */
 				95%, 100% { transform: translateX(-15rem); }   /* 2 → 1 */
 			}
+			@keyframes tortoise-path {
+				0%   { transform: translate(0, -5rem); }
+				25%  { transform: translate(4.75rem, -1.55rem); }
+				50%  { transform: translate(2.94rem, 4.05rem); }
+				75%  { transform: translate(-2.94rem, 4.05rem); }
+				100% { transform: translate(-4.75rem, -1.55rem); }
+			}
+
+			@keyframes hare-path {
+				0%   { transform: translate(4.75rem, -1.55rem); }
+				25%  { transform: translate(-2.94rem, 4.05rem); }
+				50%  { transform: translate(0, -5rem); }
+				75%  { transform: translate(2.94rem, 4.05rem); }
+				100% { transform: translate(-4.75rem, -1.55rem); }
+			}
+			@keyframes meet-flash {
+				0%, 100% { border-color: #334155; background: #0f172a; }
+				50%      { border-color: #51FF0D; background: #0e2b1a; box-shadow: 0 0 16px rgba(81,255,13,0.6); }
+			}
 
 			.title-block {
 			
@@ -364,6 +383,58 @@
 				.b0 { opacity: 1; animation: fade-out 0.2s ease-out 0.9s forwards; }
 				.b1 { animation: fade-in 0.2s ease-out 0.9s forwards, fade-out 0.2s ease-out 1.9s forwards; }
 				.b2 { color: #51FF0D; animation: fade-in 0.2s ease-out 1.9s forwards; }
+
+
+				.cycle-viz {
+					position: relative;
+					width: 14rem;
+					height: 14rem;
+					margin: 2rem auto;
+				}
+
+				.node {
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					width: 2rem;
+					height: 2rem;
+					margin: -1rem 0 0 -1rem;
+					border-radius: 50%;
+					border: 2px solid #334155;
+					background: #0f172a;
+					color: #e2e8f0;
+					font-family: monospace;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+
+				/* pentagon points, radius 5rem */
+				.n0 { transform: translate(0, -5rem); }
+				.n1 { transform: translate(4.75rem, -1.55rem); }
+				.n2 { transform: translate(2.94rem, 4.05rem); }
+				.n3 { transform: translate(-2.94rem, 4.05rem); }
+				.n4 { transform: translate(-4.75rem, -1.55rem); }
+
+				.ptr-tortoise,
+				.ptr-hare {
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					margin: -2rem 0 0 -1rem;
+					font-size: 1.4rem;
+				}
+
+				.ptr-tortoise {
+					animation: tortoise-path 8s ease-in-out 0.5s forwards;
+				}
+
+				.ptr-hare {
+					animation: hare-path 8s ease-in-out 0.5s forwards;
+				}
+				.n4 { animation: meet-flash 0.6s ease-out 8.3s 2; }
+				.x1 { position: absolute; left: 0; opacity: 0; color: #51FF0D;
+      				animation: fade-in 0.3s ease-out 8.3s forwards; }
 		</style>
 	</head>
 	<body>
@@ -503,6 +574,62 @@
 						</span></p></div>
 					</div>
 				</section>
+
+				
+
+
+				<!-- slide 3 -->
+				<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
+					<div class="title-block2">
+						<h6 style="color: #ffd166;"> 2 Pointers Slow and Fast Pointer</h6>
+						<h6 style="color:#96e6a1">Detect Loop in Linked List</h6>
+					</div>
+
+					<div class="cycle-viz">
+								<svg viewBox="0 0 200 200" width="100%" height="100%">
+									<defs>
+										<marker id="arrow" markerWidth="6" markerHeight="6"
+												refX="5" refY="3" orient="auto">
+											<path d="M0,0 L6,3 L0,6 Z" fill="#475569"/>
+										</marker>
+									</defs>
+
+									<!-- edges (drawn first, behind nodes) -->
+									<line x1="116" y1="37" x2="155" y2="65"  stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+									<line x1="165" y1="96" x2="150" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+									<line x1="124" y1="161" x2="76"  y2="161" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+									<line x1="62"  y1="142" x2="22"  y2="96"  stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+									<line x1="45"  y1="65" x2="84"  y2="37"  stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+									<!-- nodes -->
+									<circle class="node n0" cx="100" cy="25"  r="16"/>
+									<circle class="node n1" cx="171" cy="77"  r="16"/>
+									<circle class="node n2" cx="144" cy="161" r="16"/>
+									<circle class="node n3" cx="56"  cy="161" r="16"/>
+									<circle class="node n4" cx="29"  cy="77"  r="16"/>
+
+
+								</svg>
+						<!-- nodes -->
+						<div class="node n0">0</div>
+						<div class="node n1">1</div>
+						<div class="node n2">2</div>
+						<div class="node n3">3</div>
+						<div class="node n4">4</div>
+
+						<!-- pointers -->
+						<div class="ptr-tortoise">🐢</div>
+						<div class="ptr-hare">🐇</div>
+					</div>
+
+					<div class="stats-row">
+						
+					<div class="stat"><p>Cycle? <span class="count-swap">
+						<span class="x0">…</span>
+						<span class="x1">true</span>
+					</span></p></div>
+					</div>
+				</section>
 					
 			</div>
 		</div>
@@ -542,3 +669,4 @@
 		</script>
 	</body>
 </html>
+
