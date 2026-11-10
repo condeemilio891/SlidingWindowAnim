@@ -15,769 +15,194 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
-
-		<!-- Move to stylesheet -->
-		<style>
-			html:not(.playing) .reveal *,
-			html:not(.playing) .reveal *::before,
-			html:not(.playing) .reveal *::after {
-			animation: none !important;
-			}
-			h6, .stats-row p {
-			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
-			}
-/* keyframes  */
-			@keyframes left-pointer-journey {
-				0%   { transform: translateX(0); }       /* index 0 */
-				15%  { transform: translateX(2rem); }    /* index 1 */
-				30%  { transform: translateX(2rem); }    /* pause: check a==a */
-				45%  { transform: translateX(4rem); }    /* index 2 */
-				60%  { transform: translateX(4rem); }    /* pause: check c==c */
-				75%  { transform: translateX(6rem); }    /* index 3 — middle */
-				100% { transform: translateX(6rem); }    /* hold */
-			}
-
-			@keyframes right-pointer-journey {
-				0%   { transform: translateX(0); }       /* index 6 */
-				15%  { transform: translateX(-2rem); }   /* index 5 */
-				30%  { transform: translateX(-2rem); }   /* pause: check r==r */
-				45%  { transform: translateX(-4rem); }   /* index 4 */
-				60%  { transform: translateX(-4rem); }   /* pause: check a==a */
-				75%  { transform: translateX(-6rem); }   /* index 3 — middle */
-				100% { transform: translateX(-6rem); }   /* hold */
-			}
-			@keyframes left-pointer-journey-2 {
-				0%   { transform: translateX(0); }       /* index 0: g */
-				20%  { transform: translateX(2rem); }    /* index 1: n */
-				40%  { transform: translateX(2rem); }    /* pause: n==n */
-				70%  { transform: translateX(4rem); }    /* index 2: a */
-				100% { transform: translateX(4rem); }    /* STOP — mismatch */
-			}
-
-			@keyframes right-pointer-journey-2 {
-				0%   { transform: translateX(0); }       /* index 6: g */
-				20%  { transform: translateX(-2rem); }   /* index 5: n */
-				40%  { transform: translateX(-2rem); }   /* pause: n==n */
-				70%  { transform: translateX(-4rem); }   /* index 4: i */
-				100% { transform: translateX(-4rem); }   /* STOP — mismatch */
-			}
-			@keyframes fade-in      { from { opacity: 0; } to { opacity: 1; } }
-			@keyframes fade-out     { from { opacity: 1; } to { opacity: 0; } }
-
-
-
-			@keyframes ptr-l-journey {
-				0%, 5%    { transform: translateX(0); }
-				10%, 100% { transform: translateX(2.5rem); }   /* index 0 → 1 */
-			}
-
-			@keyframes ptr-r-journey {
-				0%, 15%   { transform: translateX(0); }
-				20%, 30%  { transform: translateX(-2.5rem); }  /* 7 → 6 */
-				35%, 45%  { transform: translateX(-5rem); }    /* 6 → 5 */
-				50%, 60%  { transform: translateX(-7.5rem); }  /* 5 → 4 */
-				65%, 75%  { transform: translateX(-10rem); }   /* 4 → 3 */
-				80%, 90%  { transform: translateX(-12.5rem); } /* 3 → 2 */
-				95%, 100% { transform: translateX(-15rem); }   /* 2 → 1 */
-			}
-			@keyframes tortoise-path {
-				0%,   4%  { transform: translate(0, 0); }           /* n0 */
-				20%,  24% { transform: translate(55px, 0); }        /* n1 */
-				40%,  44% { transform: translate(110px, 0); }       /* n2 */
-				60%,  64% { transform: translate(151.5px, -57px); } /* n3 */
-				80%,  84% { transform: translate(218.5px, -35.3px); } /* n4 */
-				100%      { transform: translate(218.5px, 35.3px); }  /* n5 — meet */
-			}
-			@keyframes hare-path {
-				0%,   4%  { transform: translate(0, 0); }             /* n0 */
-				20%,  24% { transform: translate(110px, 0); }         /* n2 */
-				40%,  44% { transform: translate(218.5px, -35.3px); } /* n4 */
-				60%,  64% { transform: translate(151.5px, 57px); }    /* n6 */
-				80%,  84% { transform: translate(151.5px, -57px); }   /* n3 */
-				100%      { transform: translate(218.5px, 35.3px); }  /* n5 — meet */
-			}
-			@keyframes meet-flash {
-				0%, 100% { stroke: #334155; stroke-width: 2; fill: #0f172a; }
-				50%      { stroke: #51FF0D; stroke-width: 3; fill: #0e2b1a; }
-			}
-			@keyframes tortoise-path-2 {
-				0%,   4%  { transform: translate(0, 0); }       /* n0 */
-				20%,  24% { transform: translate(48px, 0); }    /* n1 */
-				40%,  44% { transform: translate(96px, 0); }    /* n2 */
-				60%,  64% { transform: translate(144px, 0); }   /* n3 */
-				80%, 100% { transform: translate(192px, 0); }   /* n4 — hold */
-			}
-
-			@keyframes hare-path-2 {
-				0%,   4%  { transform: translate(0, 0); }       /* n0 */
-				20%,  24% { transform: translate(96px, 0); }    /* n2 */
-				40%,  44% { transform: translate(192px, 0); }   /* n4 */
-				60%,  64% { transform: translate(288px, 0); }   /* n6 */
-				80%, 100% { transform: translate(332px, 0); }   /* past n6 → NULL */
-			}
-			@keyframes null-flash {
-				0%, 100% { fill: #f87171; }
-				50%      { fill: #ff2d2d; font-size: 13px; }
-			}
-			.columns {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-				align-items: flex-start;
-				gap: 2rem;
-				width: 100%;
-			}
-
-			.column {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-
-			.column-label {
-				font-size: 0.8em;
-				margin-bottom: 0.25rem;
-			}
-			.title-block {
-			
-			position: relative;
-			top: -1rem; /* adjust */
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			}
-			.title-block2 {
-			
-			position: relative;
-			top: -7rem; /* adjust */
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			}
-			.title-block3 {
-				position: relative;
-				top: 0;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				width: 100%;
-			}
-			.stat-pill {
-				font-size: 0.7em;
-				padding: 0.25em 1em;
-				border: 2px solid #96e6a1;
-				border-radius: 999px;
-				background: rgba(150, 230, 161, 0.08);
-				line-height: 1.4;
-			}
-			.stats-row {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-evenly; /* or space-around / space-between */
-			align-items: center;
-			width: 100%;
-			margin-top: 1.5rem;
-			gap: 2rem; /* optional */
-			}
-
-			.stats-row .stat {
-			flex: 1; /* equal width columns */
-			text-align: center;
-			}
-
-			.stats-row2 {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-evenly;
-				align-items: center;
-				width: 100%;
-				margin-top: 1rem;
-				gap: 2rem;
-			}
-			.stats-row2 .stat2 {
-				flex: 1;
-				text-align: center;
-			}
-
-
-			/* Underline the window cells once the arrow lands */
-			#cell0, #cell1, #cell2, #cell3, #cell4, #cell5,
-			#cell6, #cell7, #cell8 { position: relative; }
-
-			#cell0::after, #cell1::after, #cell2::after,
-			#cell3::after, #cell4::after, #cell5::after,
-			#cell6::after, #cell7::after, #cell8::after {
-			content: "";
-			position: absolute;
-			left: 0; right: 0; bottom: -0.05em;
-			height: 0.1em;
-			background: #ffd166;
-			transform: scaleX(0);
-			transform-origin: left center;
-			}
-			#cell4::after { animation-delay: 6.5s; }
-			#cell5::after { animation-delay: 8.8s; } 
-			#cell6::after { animation-delay: 14.0s; }
-			#cell7::after { animation-delay: 14.8s; }
-			#cell8::after { animation-delay: 15.5s; }
-
-			/* swap count var */
-			.count-swap { position: relative; display: inline-block; min-width: 1ch; }
-			.c1, .c2, .c3 { position: absolute; left: 0; opacity: 0; }
-			.d1, .d2, .d3 { position: absolute; left: 0; opacity: 0; }
-			.a1, .a2, .a3, .a4, .a5, .a6, .a7 { position: absolute; left: 0; opacity: 0; }
-			.b1, .b2 { position: absolute; left: 0; opacity: 0; }
-			.c0 {
-				color: #51FF0D;
-				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
-				animation: fade-out 0.3s ease-out 1.9s forwards;
-			}
-
-			.c1 {
-				color: #51FF0D;
-				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
-				animation: fade-in  0.3s ease-out 1.9s forwards,
-						fade-out 0.3s ease-out 4.9s forwards;
-			}
-
-			.c2 {
-				color: #51FF0D;
-				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
-				animation: fade-in  0.3s ease-out 4.9s forwards,
-						fade-out 0.3s ease-out 7.9s forwards;
-			}
-
-			.c3 {
-				color: #51FF0D;
-				text-shadow: 0 0 12px rgba(255, 224, 102, 0.55);
-				animation: fade-in  0.3s ease-out 7.9s forwards;
-			}
-
-			.d0 { 
-					color: #51FF0D;
-					animation: fade-out 0.3s ease-out 1.9s forwards; }
-
-			.d1 {
-					color: #51FF0D;
-					animation: fade-in  0.3s ease-out 1.9s forwards,
-						fade-out 0.3s ease-out 4.9s forwards;
-			}
-
-			.d2 {
-					color: #f87171;
-					animation: fade-in  0.3s ease-out 4.9s forwards,
-						fade-out 0.3s ease-out 6.1s forwards;
-			}
-
-			.d3 {
-				color: #f87171;
-				text-shadow: 0 0 12px rgba(248, 113, 113, 0.55);
-				animation: fade-in  0.3s ease-out 6.1s forwards;
-			}
-
-			.array-row,
-			.pointer-row {
-			display: grid;
-			grid-template-columns: 1rem repeat(7, 2rem) 1rem; /* brackets +  7 cells */
-			justify-content: center;
-			align-items: center;
-			font-family: monospace;
-			font-size: 3rem;
-			}
-
-			.array-row > span,
-			.pointer-row > span {
-			text-align: center;
-			line-height: 1;
-			}
-
-			.pointer-row {
-			margin-top: 0.25rem;
-			font-size: 5rem;
-			}
-			.array-row2,
-			.pointer-row2 {
-				display: grid;
-				grid-template-columns: 1rem repeat(7, 2rem) 1rem;
-				justify-content: center;
-				align-items: center;
-				font-family: monospace;
-				font-size: 3rem;
-			}
-
-			.array-row2 > span,
-			.pointer-row2 > span {
-				text-align: center;
-				line-height: 1;
-			}
-
-			.pointer-row2 {
-				margin-top: 0.25rem;
-				font-size: 5rem;
-			}
-
-			.arrow-left {
-				color: #96e6a1;
-				font-weight: bold;
-				font-size: 5rem;
-				display: inline-block;
-				animation: left-pointer-journey 10s ease-in-out 0.5s forwards;
-			}		
-			.arrow-right {
-				color: #ffd166;
-				font-weight: bold;
-				font-size: 5rem;
-				display: inline-block;
-				animation: right-pointer-journey 10s ease-in-out 0.5s forwards;
-			}
-			.arrow-left2 {
-				color: #96e6a1;
-				font-weight: bold;
-				font-size: 5rem;
-				display: inline-block;
-				animation: left-pointer-journey-2 8s ease-in-out 0.5s forwards;  /* was 11s */
-			}
-
-			.arrow-right2 {
-				color: #ffd166;
-				font-weight: bold;
-				font-size: 5rem;
-				display: inline-block;
-				animation: right-pointer-journey-2 8s ease-in-out 0.5s forwards;  /* was 11s */
-			}
-
-
-
-
-			/* Slide 2 code fills the slide */
-				.reveal section.code-slide {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				}
-
-				.reveal section.code-slide pre {
-				width: 100%;
-				max-width: 100%;
-				margin: 0;
-				}
-
-				.reveal section.code-slide pre code {
-				font-size: 0.48em;        /* tune: 0.4em small → 0.55em big */
-				line-height: 1.35;
-				max-height: none;         /* kills the scrollbar */
-				padding: 1rem 1.25rem;
-				width: 100%;
-				box-sizing: border-box;
-				}
-				.container-viz {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					margin: 1rem 0;
-				}
-
-				.ptr-row,
-				.bar-row {
-					display: grid;
-					grid-template-columns: repeat(8, 2.5rem);
-					justify-content: center;
-				}
-
-				.ptr-row {
-					font-size: 2rem;
-					margin-bottom: -0.4rem;
-				}
-
-				.ptr {
-					display: inline-block;
-					text-align: center;
-					font-weight: bold;
-				}
-
-				.ptr-l {
-					color: #96e6a1;
-					animation: ptr-l-journey 10s ease-in-out 0.5s forwards;
-				}
-
-				.ptr-r {
-					color: #ffd166;
-					animation: ptr-r-journey 10s ease-in-out 0.5s forwards;
-				}
-
-				.bar-row {
-					height: 7.5rem;
-					align-items: end;
-					border-bottom: 2px solid #334155;
-					padding-bottom: 0.2rem;
-				}
-
-				.bar {
-					width: 1.8rem;
-					justify-self: center;
-					background: linear-gradient(to top, #0e6b6b, #34d399);
-					border-radius: 3px 3px 0 0;
-					display: flex;
-					justify-content: center;
-					align-items: flex-end;
-					padding-bottom: 0.15rem;
-					color: #fff;
-					font-family: monospace;
-					font-size: 0.75rem;
-				}
-				.a0 { opacity: 1; animation: fade-out 0.2s ease-out 0.9s forwards; }
-				.a1 { animation: fade-in 0.2s ease-out 0.9s forwards, fade-out 0.2s ease-out 1.9s forwards; }
-				.a2 { animation: fade-in 0.2s ease-out 1.9s forwards, fade-out 0.2s ease-out 3.4s forwards; }
-				.a3 { animation: fade-in 0.2s ease-out 3.4s forwards, fade-out 0.2s ease-out 4.9s forwards; }
-				.a4 { animation: fade-in 0.2s ease-out 4.9s forwards, fade-out 0.2s ease-out 6.4s forwards; }
-				.a5 { animation: fade-in 0.2s ease-out 6.4s forwards, fade-out 0.2s ease-out 7.9s forwards; }
-				.a6 { animation: fade-in 0.2s ease-out 7.9s forwards, fade-out 0.2s ease-out 9.4s forwards; }
-				.a7 { animation: fade-in 0.2s ease-out 9.4s forwards; }
-
-				.b0 { opacity: 1; animation: fade-out 0.2s ease-out 0.9s forwards; }
-				.b1 { animation: fade-in 0.2s ease-out 0.9s forwards, fade-out 0.2s ease-out 1.9s forwards; }
-				.b2 { color: #51FF0D; animation: fade-in 0.2s ease-out 1.9s forwards; }
-
-				.cycle-viz {
-					position: relative;
-					width: 30rem;
-					height: 20rem;
-					margin: 2rem auto;
-				}
-
-			.node {
-				fill: #0f172a;
-				stroke: #334155;
-				stroke-width: 2;
-			}
-
-			.node-label {
-				fill: #e2e8f0;
-				font-family: monospace;
-				font-size: 13px;
-				text-anchor: middle;
-				dominant-baseline: central;
-			}
-
-				.ptr-tortoise,
-				.ptr-hare {
-					font-size: 14px;
-					text-anchor: middle;
-					dominant-baseline: central;
-					pointer-events: none;
-				}
-
-				.ptr-tortoise {
-					animation: tortoise-path 12s ease-in-out 0.5s forwards;
-				}
-
-				.ptr-hare {
-					animation: hare-path 12s ease-in-out 0.5s forwards;
-				}
-				.ptr-tortoise2,
-				.ptr-hare2 {
-					font-size: 14px;
-					text-anchor: middle;
-					dominant-baseline: central;
-					pointer-events: none;
-				}
-
-				.ptr-tortoise2 {
-					animation: tortoise-path-2 12s ease-in-out 0.5s forwards;
-				}
-
-				.ptr-hare2 {
-					animation: hare-path-2 12s ease-in-out 0.5s forwards;
-				}
-
-				#meet-node {
-					animation: meet-flash 0.6s ease-out 12.8s 2;
-					
-				}
-				.x1 {
-					position: absolute; left: 0; opacity: 0;
-					color: #51FF0D;
-					animation: fade-in 0.3s ease-out 12.6s forwards;
-				}
-
-				.y1 {
-					position: absolute; left: 0; opacity: 0;
-					color: #f87171;
-					animation: fade-in 0.3s ease-out 9.4s forwards;
-				}
-				.x0 { animation: fade-out 0.3s ease-out 12.6s forwards; }
-				.y0 { animation: fade-out 0.3s ease-out 9.4s forwards; }
-				.null-label {
-					fill: #f87171;
-					font-family: monospace;
-					font-size: 11px;
-					text-anchor: middle;
-					dominant-baseline: central;
-					letter-spacing: 0.1em;
-					animation: null-flash 0.6s ease-out 9s 2;
-				}
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
-					<div class="title-block">
-						<h6 style="color: #ffd166;">Problem Solving Methods: 2 Pointers</h6>
-						<h6 style="color:#96e6a1">Valid Palindrome</h6>
-					</div>
-					<!-- array row -->
-					<div class="array-row">
-					<span>[</span>
-					<span id="cell0">r</span><span id="cell1">a</span>
-					<span id="cell2">c</span><span id="cell3">e</span>
-					<span id="cell4">c</span><span id="cell5">a</span>
-					<span id="cell6">r</span>	
-					<span>]</span>
-					</div>
-					<!-- pointer row -->
-					<div class="pointer-row">
-					<span></span>                          <!-- bracket col -->
-					<span class="arrow arrow-left">↑</span>           <!-- index 0 → 1 -->
-					<span></span>                          <!-- index 1 -->
-					<span></span>                          <!-- index 2 -->
-					<span></span>                          <!-- index 3 -->
-					<span></span>                          <!-- index 4 -->
-					<span></span>                          <!-- index 5 -->
-					<span class="arrow arrow-right">↑</span>           <!-- index 6 -->
-
-					<span></span>                          <!-- bracket col -->
-					</div>
-					<!-- Stats Row -->
-					<div class="stats-row">
-						<div class="stat"><p>Left Pointer= <span class="count-swap">
-						<span class="c0">r</span><span class="c1">a</span>
-						<span class="c2">c</span><span class="c3">e</span>
-						</span></p></div>
-						<!-- results arr -->
-						<div class="stat">
-						</div>
-
-						<div class="stat"><p>Right Pointer= <span class="count-swap">
-						<span class="c0">r</span><span class="c1">a</span>
-						<span class="c2">c</span><span class="c3">e</span>
-						</span></p></div>
-					</div>
-
-
-
-
-
-					<!-- col 2 -->
-					 <h6 style="color:#f87171;">Invalid Palindrome</h6>
-					<div class="array-row2">
-						
-					<span>[</span>
-						<span id="cell2-0">g</span><span id="cell2-1">n</span>
-						<span id="cell2-2">a</span><span id="cell2-3">w</span>
-						<span id="cell2-4">i</span><span id="cell2-5">n</span>
-						<span id="cell2-6">g</span>
-					<span>]</span>
-					</div>
-
-					<!-- pointer row -->
-					<div class="pointer-row2">
-					<span></span>                          <!-- bracket col -->
-						<span class="arrow arrow-left2 ">↑</span>           <!-- index 0 → 1 -->
-						<span></span>                          <!-- index 1 -->
-						<span></span>                          <!-- index 2 -->
-						<span></span>                          <!-- index 3 -->
-						<span></span>                          <!-- index 4 -->
-						<span></span>                          <!-- index 5 -->
-					<span class="arrow arrow-right2">↑</span>           <!-- index 6 -->
-
-					<span></span>                          <!-- bracket col -->
-					</div>
-					<!-- Stats Row -->
-					<div class="stats-row2">
-					<div class="stat2"><p>Left Pointer= <span class="count-swap">
-						<span class="d0">g</span><span class="d1">n</span>
-						<span class="d2">a</span><span class="d3">✗</span>
-					</span></p></div>
-
-					<div class="stat2"><p>Right Pointer= <span class="count-swap">
-						<span class="d0">g</span><span class="d1">n</span>
-						<span class="d2">i</span><span class="d3">✗</span>
-					</span></p></div>
-				</section>
-
-
-
-
-
-
-				<!-- slide 2 -->
-				<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
-					<div class="title-block2">
-						<h6 style="color: #ffd166;">Problem Solving Methods: 2 Pointers</h6>
-						<h6 style="color:#96e6a1">Container With The Most Water</h6>
-					</div>
-
-					<div class="container-viz">
-						<div class="ptr-row">
-							<span class="ptr ptr-l">↓</span>
-							<span></span><span></span><span></span><span></span>
-							<span></span><span></span>
-							<span class="ptr ptr-r">↓</span>
-						</div>
-						<div class="bar-row">
-							<div class="bar" style="height: 1rem;"><span>1</span></div>
-							<div class="bar" style="height: 7rem;"><span>7</span></div>
-							<div class="bar" style="height: 2rem;"><span>2</span></div>
-							<div class="bar" style="height: 5rem;"><span>5</span></div>
-							<div class="bar" style="height: 4rem;"><span>4</span></div>
-							<div class="bar" style="height: 7rem;"><span>7</span></div>
-							<div class="bar" style="height: 3rem;"><span>3</span></div>
-							<div class="bar" style="height: 6rem;"><span>6</span></div>
-						</div>
-					</div>
-
-					<div class="stats-row">
-						<div class="stat"><p>Area = <span class="count-swap">
-							<span class="a0">—</span>
-							<span class="a1">7</span>
-							<span class="a2">36</span>
-							<span class="a3">15</span>
-							<span class="a4">28</span>
-							<span class="a5">12</span>
-							<span class="a6">10</span>
-							<span class="a7">2</span>
-						</span></p></div>
-						<div class="stat"><p>Max = <span class="count-swap">
-							<span class="b0">0</span>
-							<span class="b1">7</span>
-							<span class="b2">36</span>
-						</span></p></div>
-					</div>
-				</section>
-
-				
-
-
-	<!-- slide 3 -->
-<section data-background-gradient="linear-gradient(to bottom, #1B1B1B, #171821, #121427, #0E112D, #090E33, #050A39, #00073F)">
-    <div class="title-block3">
-        <h6 style="color:#96e6a1; display: flex; justify-content: center; width: 100%;">
-            <span>Detect Loop in Linked List using Slow &amp; Fast Pointers</span>
-        </h6>
-        <div style="display: flex; justify-content: center; gap: 1.5rem; width: 100%;">
-            <span class="stat-pill">Time: O(n)</span>
-            <span class="stat-pill">Space: O(1)</span>
-        </div>
+		<link rel="stylesheet" href="index.css" />
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-color="#D0F0FF">
+            <div style="text-align: center;">		
+<div style="text-align: center;">
+  <h6>Rescue Boats Sorted</h6>
+  <h6>Two Pointers + Greedy</h6>
+  <p class="limit-label">
+    <span>Time: O(n)</span>
+    <span>Boat limit: 5</span>
+    <span>Space: O(1)</span>
+</p>
+</div>
+<svg class="sea" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="600px"
+   height="400px" viewBox="0 0 800 350" style="enable-background:new 0 0 800 400;" xml:space="preserve">
+
+<g id="Sky" class="sky">
+  <radialGradient id="SVGID_1_" cx="400" cy="202.5" r="317.3423" gradientUnits="userSpaceOnUse">
+    <stop  offset="0" style="stop-color:#E6DBFA"/>
+    <stop  offset="3.659654e-002" style="stop-color:#E5DCFA"/>
+    <stop  offset="0.5708" style="stop-color:#D5EBFE"/>
+    <stop  offset="1" style="stop-color:#D0F0FF"/>
+  </radialGradient>
+  <rect y="-1" class="st1" width="800" height="407"/>
+</g>
+<g id="DarkWaves" class="DarkWaves">
+  <g>
+    <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="400.0005" y1="602" x2="400.0005" y2="202.3545">
+      <stop  offset="0" style="stop-color:#0000FF"/>
+      <stop  offset="0.1789" style="stop-color:#0020EC"/>
+      <stop  offset="0.4149" style="stop-color:#0043D7"/>
+      <stop  offset="0.6374" style="stop-color:#005CC8"/>
+      <stop  offset="0.8386" style="stop-color:#006CBF"/>
+      <stop  offset="1" style="stop-color:#0071BC"/>
+    </linearGradient>
+    <path class="st2" d="M761.8,202.4c-24.7,0-36.7,7.2-49.5,14.7c-13.2,7.8-26.8,15.9-53.8,15.9c-27,0-40.6-8.1-53.8-15.9
+      c-12.8-7.6-24.9-14.7-49.6-14.7c-24.7,0-36.8,7.2-49.6,14.7c-13.2,7.8-26.8,15.9-53.8,15.9c-27,0-40.7-8.1-53.8-15.9
+      c-12.8-7.6-24.9-14.7-49.6-14.7c-24.7,0-36.8,7.2-49.6,14.7c-13.2,7.8-26.8,15.9-53.8,15.9c-27,0-40.7-8.1-53.8-15.9
+      c-12.8-7.6-24.9-14.7-49.6-14.7c-24.7,0-36.8,7.2-49.6,14.7C78.7,224.9,65,232.9,38,232.9c-27,0-40.4-8.1-53.6-15.9
+      c-12.1-7.1-24.3-13.9-45.4-14.6V602h922V232.9c-22.6-0.8-37.2-8.4-49.7-15.8C798.5,209.5,786.5,202.4,761.8,202.4z"/>
+  </g>
+</g>
+<!-- island: mid-distance, behind the near water -->
+<g id="Island" transform="translate(400, 238)">
+	<g transform="scale(1.8)">
+    <!-- shadow under the base -->
+		<ellipse cx="0" cy="2" rx="110" ry="8" fill="#0a4a80" opacity="0.25"/>
+
+		<!-- beach / base -->
+		<path d="M -90,0 C -60,10 -20,12 10,10 C 40,8 70,4 100,0 Z" fill="#e8d9a8"/>
+
+		<!-- main hill -->
+		<path d="M -88,0 C -76,-18 -58,-38 -30,-48 C -12,-54 6,-50 20,-38 C 34,-24 46,-8 58,0 Z" fill="#3b5a3a"/>
+
+		<!-- secondary rock -->
+		<path d="M 52,0 C 60,-14 74,-28 90,-30 C 102,-32 110,-18 116,0 Z" fill="#2f4a30"/>
+
+		<!-- lit face on main hill -->
+		<path d="M -30,-48 C -14,-54 4,-50 16,-38 C 6,-24 -8,-8 -22,0 C -32,-14 -36,-32 -30,-48 Z" fill="#4f6f4a" opacity="0.75"/>
+
+		<!-- palm -->
+		<g class="palm">
+			<path d="M 12,-46 C 14,-56 16,-64 20,-72" stroke="#5a3d24" stroke-width="3" fill="none" stroke-linecap="round"/>
+			<path d="M 20,-72 C 8,-78 -4,-76 -10,-70" stroke="#2f5a2f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+			<path d="M 20,-72 C 32,-80 44,-76 50,-70" stroke="#2f5a2f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+			<path d="M 20,-72 C 14,-84 4,-88 -4,-86" stroke="#3a6b3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+			<path d="M 20,-72 C 26,-86 36,-90 44,-86" stroke="#3a6b3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+		</g>
+	</g>
+</g>
+<g id="LightWaves" class="LightWaves">
+  <g>
+    <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="400.0005" y1="600" x2="400.0005" y2="214.3545">
+      <stop  offset="0" style="stop-color:#0000FF"/>
+      <stop  offset="0.1643" style="stop-color:#0B2CF7"/>
+      <stop  offset="0.3574" style="stop-color:#1559F0"/>
+      <stop  offset="0.5431" style="stop-color:#1E7DEA"/>
+      <stop  offset="0.7168" style="stop-color:#2496E6"/>
+      <stop  offset="0.874" style="stop-color:#28A6E3"/>
+      <stop  offset="1" style="stop-color:#29ABE2"/>
+    </linearGradient>
+    <path class="st3" d="M750.9,229.8c-14.8-7.9-28.7-15.4-57.2-15.4c-28.5,0-42.4,7.5-57.2,15.4c-15.2,8.2-30.9,16.6-62.1,16.6
+      s-46.9-8.4-62.1-16.6c-14.8-7.9-28.7-15.4-57.2-15.4c-28.5,0-42.4,7.5-57.2,15.4c-15.2,8.2-30.9,16.6-62.1,16.6
+      c-31.2,0-46.9-8.4-62.1-16.6c-14.8-7.9-28.7-15.4-57.2-15.4c-28.5,0-42.4,7.5-57.2,15.4c-15.2,8.2-30.9,16.6-62.1,16.6
+      c-31.2,0-46.9-8.4-62.1-16.6c-14.8-7.9-28.9-15.4-57.3-15.4c-16.9,0-28.8,2.6-38.8,6.4V600h922V237c-12,5.3-26,9.4-47.8,9.4
+      C782.1,246.4,766.1,237.9,750.9,229.8z"/>
+  </g>
+
+</g>
+
+
+<g transform="translate(-100, 232)">
+    <g class="boat-travel">
+		<g transform="scale(1.8)">
+			<g class="boat-bob">
+				<path class="wake" d="M -30,4 Q -60,10 -90,6 Q -60,2 -30,0 Z"/>
+				<path class="hull" d="M -24,0 C -16,13 16,13 24,0 Z"/>
+				<path class="deck" d="M -24,0 L 24,0 L 18,-3 L -18,-3 Z"/>
+				<line class="mast" x1="0" y1="-3" x2="0" y2="-58"/>
+				<path class="sail-main" d="M 2,-6 L 2,-54 L 22,-6 Z"/>
+				<text class="sail-number" x="9" y="-20">5</text>
+				<path class="sail-jib"  d="M -3,-10 L -3,-46 L -20,-10 Z"/>
+				<path class="flag" d="M 0,-58 L 10,-54 L 0,-50 Z"/>
+			</g>
+		</g>
+    </g>
+</g>
+<g id="WhiteWaves" class="WhiteWaves">
+  <g class="st0">
+    <path class="st4" d="M-71,220c94.2,0,94.2,18,188.4,18c94.2,0,94.2-18,188.4-18c94.2,0,94.2,18,188.4,18c94.2,0,94.2-18,188.4-18
+      s94.2,18,188.4,18"/>
+  </g>
+</g>
+<g id="People" transform="translate(370, 210)">
+	<g transform="scale(1.3)">
+		        <!-- two pointers: now relative to the people's own coordinates -->
+        <g class="ptr-left" transform="translate(-75, -44)">
+            <text class="ptr-arrow">↓</text>
+        </g>
+        <g class="ptr-right" transform="translate(75, -44)">
+            <text class="ptr-arrow">↓</text>
+        </g>
+
+		<!-- people -->
+		<!-- weight 5 -->
+		<g transform="translate(-75, 0)">
+			<g class="person" data-weight="5">
+				<circle cx="0" cy="-20.5" r="2.5"/>
+				<path d="M 0,-18 L 0,-5.75 M -3.5,-15 L 3.5,-15 M 0,-5.75 L -3,0 M 0,-5.75 L 3,0"/>
+				<text class="person-weight" y="-26">5</text>
+			</g>
+		</g>
+
+		<!-- weight 3 -->
+		<g transform="translate(-45, 0)">
+			<g class="person" data-weight="3">
+				<circle cx="0" cy="-15.5" r="2.5"/>
+				<path d="M 0,-13 L 0,-4.5 M -3.5,-12 L 3.5,-12 M 0,-4.5 L -3,0 M 0,-4.5 L 3,0"/>
+				<text class="person-weight" y="-21">3</text>
+			</g>
+		</g>
+
+		<!-- weight 2 -->
+		<g transform="translate(-15, 0)">
+			<g class="person" data-weight="2">
+				<circle cx="0" cy="-12.5" r="2.5"/>
+				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
+				<text class="person-weight" y="-18">2</text>
+			</g>
+		</g>
+
+		<!-- weight 2 -->
+		<g transform="translate(15, 0)">
+			<g class="person" data-weight="2">
+				<circle cx="0" cy="-12.5" r="2.5"/>
+				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
+				<text class="person-weight" y="-18">2</text>
+			</g>
+		</g>
+
+		<!-- weight 1 -->
+		<g transform="translate(45, 0)">
+			<g class="person" data-weight="1">
+				<circle cx="0" cy="-10.5" r="2.5"/>
+				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
+				<text class="person-weight" y="-16">1</text>
+			</g>
+		</g>
+
+		<!-- weight 1 -->
+		<g transform="translate(75, 0)">
+			<g class="person" data-weight="1">
+				<circle cx="0" cy="-10.5" r="2.5"/>
+				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
+				<text class="person-weight" y="-16">1</text>
+			</g>
+		</g>
+	</g>	
+</g>
+
+</svg>
+       </div>
+        
+        </section>
     </div>
-
-    <div class="columns">
-
-        <!-- COLUMN 1: cycle -->
-        <div class="column">
-            
-            <div class="cycle-viz">
-                <svg viewBox="0 0 300 200" width="100%" height="100%">
-                    <defs>
-                        <marker id="arrow-a" markerWidth="6" markerHeight="6"
-                                refX="5" refY="3" orient="auto">
-                            <path d="M0,0 L6,3 L0,6 Z" fill="#475569"/>
-                        </marker>
-                    </defs>
-
-                    <line x1="50"  y1="100" x2="75"  y2="100" stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-                    <line x1="105" y1="100" x2="130" y2="100" stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-
-                    <line x1="153.8" y1="87.9"  x2="177.7" y2="55.1"  stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-                    <line x1="200.8" y1="47.6"  x2="239.2" y2="60.1"  stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-                    <line x1="253.5" y1="79.7"  x2="253.5" y2="120.3" stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-                    <line x1="239.2" y1="139.9" x2="200.8" y2="152.4" stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-                    <line x1="177.7" y1="144.9" x2="153.8" y2="112.1" stroke="#475569" stroke-width="2" marker-end="url(#arrow-a)"/>
-
-                    <circle class="node" cx="35"    cy="100" r="15"/>
-                    <circle class="node" cx="90"    cy="100" r="15"/>
-                    <circle class="node" cx="145"   cy="100" r="15"/>
-                    <circle class="node" cx="186.5" cy="43"  r="15"/>
-                    <circle class="node" cx="253.5" cy="64.7" r="15"/>
-                    <circle id="meet-node" class="node" cx="253.5" cy="135.3" r="15"/>
-                    <circle class="node" cx="186.5" cy="157" r="15"/>
-
-                    <text class="node-label" x="35"    y="100">0</text>
-                    <text class="node-label" x="90"    y="100">1</text>
-                    <text class="node-label" x="145"   y="100">2</text>
-                    <text class="node-label" x="186.5" y="43">3</text>
-                    <text class="node-label" x="253.5" y="64.7">4</text>
-                    <text class="node-label" x="253.5" y="135.3">5</text>
-                    <text class="node-label" x="186.5" y="157">6</text>
-
-                    <text class="ptr-tortoise" x="35" y="100">🐢</text>
-                    <text class="ptr-hare"     x="35" y="100">🐇</text>
-                </svg>
-            </div>
-        </div>
-
-        <!-- COLUMN 2: no cycle -->
-        <div class="column">
-            
-            <div class="cycle-viz">
-                <svg viewBox="0 0 380 120" width="100%" height="100%">
-                    <defs>
-                        <marker id="arrow-b" markerWidth="6" markerHeight="6"
-                                refX="5" refY="3" orient="auto">
-                            <path d="M0,0 L6,3 L0,6 Z" fill="#475569"/>
-                        </marker>
-                    </defs>
-
-                    <line x1="47"  y1="60" x2="61"  y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="95"  y1="60" x2="109" y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="143" y1="60" x2="157" y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="191" y1="60" x2="205" y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="239" y1="60" x2="253" y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="287" y1="60" x2="301" y2="60" stroke="#475569" stroke-width="2" marker-end="url(#arrow-b)"/>
-                    <line x1="335" y1="60" x2="349" y2="60" stroke="#f87171" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-b)"/>
-
-                    <circle class="node" cx="30"  cy="60" r="15"/>
-                    <circle class="node" cx="78"  cy="60" r="15"/>
-                    <circle class="node" cx="126" cy="60" r="15"/>
-                    <circle class="node" cx="174" cy="60" r="15"/>
-                    <circle class="node" cx="222" cy="60" r="15"/>
-                    <circle class="node" cx="270" cy="60" r="15"/>
-                    <circle class="node" cx="318" cy="60" r="15"/>
-
-                    <text class="node-label" x="30"  y="60">0</text>
-                    <text class="node-label" x="78"  y="60">1</text>
-                    <text class="node-label" x="126" y="60">2</text>
-                    <text class="node-label" x="174" y="60">3</text>
-                    <text class="node-label" x="222" y="60">4</text>
-                    <text class="node-label" x="270" y="60">5</text>
-                    <text class="node-label" x="318" y="60">6</text>
-
-                    <text class="null-label" x="362" y="60">NULL</text>
-
-                    <text class="ptr-tortoise2" x="30" y="60">🐢</text>
-                    <text class="ptr-hare2"     x="30" y="60">🐇</text>
-                </svg>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="stats-row">
-        <div class="stat"><p>Cycle? <span class="count-swap">
-            <span class="x0">…</span>
-            <span class="x1">true</span>
-        </span></p></div>
-        <div class="stat"><p>Cycle? <span class="count-swap">
-            <span class="y0">…</span>
-            <span class="y1">false</span>
-        </span></p></div>
-    </div>
-</section>
-					
-			</div>
-		</div>
-
+</div>
 		<script src="dist/reveal.js"></script>
 		<script src="dist/plugin/notes.js"></script>
 		<script src="dist/plugin/markdown.js"></script>
@@ -786,22 +211,25 @@
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
-			// Reveal.initialize({
-			// 	hash: true,
-
-			// 	// Learn about plugins: https://revealjs.com/plugins/
-			// 	plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-			// });
 
 
-Reveal.initialize({
-    hash: true,
-    width: 1080,
-    height: 1350,        // Instagram carousel ratio (4:5)
-    margin: 0.04,
-    center: true,
-    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-});
+
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			});
+
+
+// Reveal.initialize({
+//     hash: true,
+//     width: 1080,
+//     height: 1350,        // Instagram carousel ratio (4:5)
+//     margin: 0.04,
+//     center: true,
+//     plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+// });
 
 		</script>
 		<script >
@@ -818,7 +246,7 @@ Reveal.initialize({
 				// Kick it off after Reveal has rendered the first slide
 				Reveal.on('ready', () => {
 				replay();
-				setInterval(replay, LOOP_MS);
+				//setInterval(replay, LOOP_MS); //NO REPLAY
 				});
 
 		</script>

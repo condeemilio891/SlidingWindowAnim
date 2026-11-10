@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Calligraffitti|Open+Sans');
+
+html, body {
+  height: 100%;
+  background-color: #D0F0FF;
+}
+
+h1 {
+  font-family: 'Calligraffitti';
+}
+
+h3 {
+  font-family: 'Open Sans';
+}
+.limit-label {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #0a4a80;
+    letter-spacing: 0.03em;
+    margin-top: 0.5rem;
+}
+.sea {
+  border: 3px dashed #000;
+}
+
+.DarkWaves {
+    animation: darkwaves 10s ease-in-out infinite alternate;
+}
+
+@keyframes darkwaves {
+    0%   { transform: translate(-14px, -3px); }
+    100% { transform: translate(14px, 3px); }
+}
+
+.LightWaves {
+    animation: lightwaves 7s ease-in-out infinite alternate;
+}
+
+@keyframes lightwaves {
+    0%   { transform: translate(-20px, 4px); }
+    100% { transform: translate(20px, -4px); }
+}
+
+.WhiteWaves {
+    animation: whitewaves 4s ease-in-out infinite alternate;
+}
+
+@keyframes whitewaves {
+    0%   { transform: translate(-28px, 8px); }
+    100% { transform: translate(28px, -2px); }
+}
+
+.st1 { fill: url(#SVGID_1_); }
+.st2 { fill: url(#SVGID_2_); }
+.st3 { fill: url(#SVGID_3_); }
+.st4 {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+/* horizontal travel */
+.boat-travel {
+    animation: boat-travel 14s linear forwards;
+}
+
+@keyframes boat-travel {
+    0%   { transform: translateX(-110px); }
+    54%  { transform: translateX(450px); }
+    70%  { transform: translateX(450px); }   /* hold until 70% instead of 64% */
+    100% { transform: translateX(1110px); }
+}
+
+.boat-bob {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: boat-bob 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes boat-bob {
+    0%   { transform: translateY(-3px) rotate(-2.5deg); }
+    100% { transform: translateY(3px)  rotate(2.5deg); }
+}
+/* boat styling */
+.hull      { fill: #3b2a1e; }
+.deck      { fill: #8b5a2b; }
+.mast      { stroke: #2a1d14; stroke-width: 2; }
+.sail-main { fill: #f4f1e8; stroke: #c9c2b0; stroke-width: 0.8; }
+.sail-jib  { fill: #e8e2d3; stroke: #c9c2b0; stroke-width: 0.8; }
+.flag      { fill: #d94f4f; }
+.wake {
+    fill: rgba(255,255,255,0.55);
+    transform-box: fill-box;
+    transform-origin: right center;
+    animation: wake-fade 2.6s ease-out infinite;
+}
+.sail-number {
+    fill: #3b2a1e;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+@keyframes wake-fade {
+    0%   { opacity: 0.7; transform: scaleX(0.4); }
+    100% { opacity: 0;   transform: scaleX(1.4); }
+}
+
+.palm {
+    transform-box: fill-box;
+    transform-origin: bottom center;
+    animation: palm-sway 5s ease-in-out infinite;
+}
+
+@keyframes palm-sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50%      { transform: rotate(2deg); }
+}
+.person {
+    transform-origin: 0 0;
+    fill: none;
+    stroke: #2a1d14;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: person-jump 2.4s ease-in-out infinite;
+}
+.person[data-weight="5"] {
+    animation: person-board 14s ease-in-out forwards;
+}
+
+.person circle {
+    fill: #2a1d14;
+    stroke: none;
+}
+
+.person-weight {
+    fill: #2a1d14;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 8px;
+    text-anchor: middle;
+    opacity: 0.7;
+}
+@keyframes person-jump {
+    0%,  45%, 100% { transform: translateY(0)     scaleY(1); }
+    8%             { transform: translateY(0)     scaleY(0.9); }   /* crouch */
+    22%            { transform: translateY(-16px) scaleY(1.06); }  /* rise */
+    34%            { transform: translateY(0)     scaleY(0.94); }  /* land */
+}
+@keyframes person-board {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);            animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);         animation-timing-function: ease-out; }
+    60%      { transform: translate(30px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
+    64%      { transform: translate(60px, 17px) scaleY(0.9);    animation-timing-function: ease-out; }
+    70%      { transform: translate(60px, 17px) scaleY(1);      animation-timing-function: linear; }
+    100%     { transform: translate(567.7px, 17px) scaleY(1); }
+}
+.ptr-arrow {
+    font-size: 55px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.ptr-left .ptr-arrow  { fill: #96e6a1; }
+.ptr-right .ptr-arrow { fill: #ffd166; }
+.ptr-left {
+    animation: ptr-left-move 14s ease-out forwards;
+}
+@keyframes ptr-left-move {
+    0%, 76%  { transform: translate(-75px, -44px); }   /* still over the 5 */
+    84%      { transform: translate(-45px, -44px); }   /* now over the 3 */
+    100%     { transform: translate(-45px, -44px); }   /* hold */
+}
