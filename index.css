@@ -22,6 +22,14 @@ h3 {
     letter-spacing: 0.03em;
     margin-top: 0.5rem;
 }
+
+.limit-label .pill {
+    padding: 0.2em 0.9em;
+    border: 2px solid #0a4a80;
+    border-radius: 999px;
+    background: rgba(10, 74, 128, 0.08);
+    line-height: 1.5;
+}
 .sea {
   border: 3px dashed #000;
 }
@@ -67,13 +75,22 @@ h3 {
 .boat-travel {
     animation: boat-travel 14s linear forwards;
 }
-
+.boat-travel-2 {
+    animation: boat-travel 14s linear 8s forwards;
+}
+.boat-travel-3{
+    animation: boat-travel 14s linear 16s forwards;
+}
+.boat-travel-4{
+    animation: boat-travel 14s linear 24s forwards;
+}
 @keyframes boat-travel {
     0%   { transform: translateX(-110px); }
     54%  { transform: translateX(450px); }
     70%  { transform: translateX(450px); }   /* hold until 70% instead of 64% */
     100% { transform: translateX(1110px); }
 }
+
 
 .boat-bob {
     transform-box: fill-box;
@@ -129,11 +146,9 @@ h3 {
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    animation: person-jump 2.4s ease-in-out infinite;
+    /* animation: person-jump 2.4s ease-in-out infinite; */
 }
-.person[data-weight="5"] {
-    animation: person-board 14s ease-in-out forwards;
-}
+
 
 .person circle {
     fill: #2a1d14;
@@ -153,14 +168,40 @@ h3 {
     22%            { transform: translateY(-16px) scaleY(1.06); }  /* rise */
     34%            { transform: translateY(0)     scaleY(0.94); }  /* land */
 }
-@keyframes person-board {
-    0%, 54%  { transform: translate(0, 0) scaleY(1);            animation-timing-function: ease-in; }
-    56%      { transform: translate(0, 0) scaleY(0.85);         animation-timing-function: ease-out; }
-    60%      { transform: translate(30px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
-    64%      { transform: translate(60px, 17px) scaleY(0.9);    animation-timing-function: ease-out; }
-    70%      { transform: translate(60px, 17px) scaleY(1);      animation-timing-function: linear; }
+.person[data-weight="5"]   { animation: person-board-5  14s ease-in-out forwards; }
+.person[data-weight="3"]   { animation: person-board-3  14s ease-in-out 8s forwards; }
+#last-one                  { animation: person-board-1  14s ease-in-out 8s forwards; }
+#firstWeight2 .person      { animation: person-board-3  14s ease-in-out 16s forwards; }
+#penultimate-one           { animation: person-board-1 14s ease-in-out 16s forwards; }
+#secondWeight2 .person     { animation: person-board-1 14s ease-in-out 24s forwards; }
+@keyframes person-board-5 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);          animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);       animation-timing-function: ease-out; }
+    60%      { transform: translate(30px, -25px) scaleY(1.1); animation-timing-function: ease-in; }
+    64%      { transform: translate(60px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
+    70%      { transform: translate(60px, 17px) scaleY(1);    animation-timing-function: linear; }
     100%     { transform: translate(567.7px, 17px) scaleY(1); }
 }
+
+@keyframes person-board-3 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);            animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);         animation-timing-function: ease-out; }
+    60%      { transform: translate(18px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
+    64%      { transform: translate(36.5px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
+    70%      { transform: translate(36.5px, 17px) scaleY(1);    animation-timing-function: linear; }
+    100%     { transform: translate(544.2px, 17px) scaleY(1); }
+}
+
+@keyframes person-board-1 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);             animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);          animation-timing-function: ease-out; }
+    60%      { transform: translate(-28px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
+    64%      { transform: translate(-56px, 17px) scaleY(0.9);    animation-timing-function: ease-out; }
+    70%      { transform: translate(-56px, 17px) scaleY(1);      animation-timing-function: linear; }
+    100%     { transform: translate(451.7px, 17px) scaleY(1); }
+}
+
+
 .ptr-arrow {
     font-size: 55px;
     font-weight: 700;
@@ -171,10 +212,58 @@ h3 {
 .ptr-left .ptr-arrow  { fill: #96e6a1; }
 .ptr-right .ptr-arrow { fill: #ffd166; }
 .ptr-left {
-    animation: ptr-left-move 14s ease-out forwards;
+    animation: ptr-left-move 30s ease-out forwards;
+}
+
+.ptr-right {
+    animation: ptr-right-move 30s ease-out forwards;
 }
 @keyframes ptr-left-move {
-    0%, 76%  { transform: translate(-75px, -44px); }   /* still over the 5 */
-    84%      { transform: translate(-45px, -44px); }   /* now over the 3 */
-    100%     { transform: translate(-45px, -44px); }   /* hold */
+    0%, 30%  { transform: translate(-75px, -44px); }
+    32%      { transform: translate(-45px, -44px); }
+    58%      { transform: translate(-45px, -44px); }
+    60%      { transform: translate(-15px, -44px); }
+    100%     { transform: translate(-15px, -44px); }
+}
+
+@keyframes ptr-right-move {
+    0%, 58%  { transform: translate(75px, -44px); }
+    60%      { transform: translate(45px, -44px); }
+    84%      { transform: translate(45px, -44px); }
+    86%      { transform: translate(15px, -44px); }
+    100%     { transform: translate(15px, -44px); }
+}
+
+
+
+.fish {
+    fill: #1a5a99;
+    opacity: 0.55;
+}
+
+.fish-1 { animation: fish-swim-right 16s linear infinite; }
+.fish-2 { animation: fish-swim-right 22s linear infinite; }
+.fish-3 { animation: fish-swim-left  19s linear infinite; }
+.fish-4 { animation: fish-swim-left  25s linear infinite; }
+
+@keyframes fish-swim-right {
+    0%   { transform: translate(120px, 280px); }
+    100% { transform: translate(900px, 280px); }
+}
+
+@keyframes fish-swim-left {
+    0%   { transform: translate(680px, 265px); }
+    100% { transform: translate(-100px, 265px); }
+}
+
+.fish-3 { animation-name: fish-swim-left-alt; }
+@keyframes fish-swim-left-alt {
+    0%   { transform: translate(680px, 265px); }
+    100% { transform: translate(-100px, 265px); }
+}
+
+.fish-4 { animation-name: fish-swim-left-alt-2; }
+@keyframes fish-swim-left-alt-2 {
+    0%   { transform: translate(280px, 318px); }
+    100% { transform: translate(-100px, 318px); }
 }

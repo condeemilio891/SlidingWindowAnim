@@ -24,11 +24,12 @@
 <div style="text-align: center;">
   <h6>Rescue Boats Sorted</h6>
   <h6>Two Pointers + Greedy</h6>
-  <p class="limit-label">
-    <span>Time: O(n)</span>
-    <span>Boat limit: 5</span>
-    <span>Space: O(1)</span>
-</p>
+	<p class="limit-label">
+		<span class="pill">Time: O(n)</span>
+		<span class="pill">Boat weight limit: 5</span>
+		<span class="pill">Boat person limit: 2</span>
+		<span class="pill">Space: O(1)</span>
+	</p>
 </div>
 <svg class="sea" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="600px"
    height="400px" viewBox="0 0 800 350" style="enable-background:new 0 0 800 400;" xml:space="preserve">
@@ -87,6 +88,7 @@
 		</g>
 	</g>
 </g>
+
 <g id="LightWaves" class="LightWaves">
   <g>
     <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="400.0005" y1="600" x2="400.0005" y2="214.3545">
@@ -106,11 +108,89 @@
   </g>
 
 </g>
+<!-- fish: submerged, between wave layers -->
+<g id="Fish" transform="translate(0, 0)">
 
+    <!-- fish 1: small, swims right -->
+    <g class="fish fish-1" transform="translate(120, 280)">
+        <path d="M 0,0 C 4,-4 12,-4 16,0 C 12,4 4,4 0,0 Z"/>
+        <path d="M 0,0 L -6,-4 L -6,4 Z"/>
+    </g>
 
+    <!-- fish 2: medium, swims right -->
+    <g class="fish fish-2" transform="translate(540, 300)">
+        <path d="M 0,0 C 5,-5 15,-5 20,0 C 15,5 5,5 0,0 Z"/>
+        <path d="M 0,0 L -8,-5 L -8,5 Z"/>
+    </g>
+
+    <!-- fish 3: small, swims left -->
+    <g class="fish fish-3" transform="translate(680, 265)">
+        <path d="M 0,0 C -4,-4 -12,-4 -16,0 C -12,4 -4,4 0,0 Z"/>
+        <path d="M 0,0 L 6,-4 L 6,4 Z"/>
+    </g>
+
+    <!-- fish 4: medium, swims left -->
+    <g class="fish fish-4" transform="translate(280, 318)">
+        <path d="M 0,0 C -5,-5 -15,-5 -20,0 C -15,5 -5,5 0,0 Z"/>
+        <path d="M 0,0 L 8,-5 L 8,5 Z"/>
+    </g>
+
+</g>
+<!-- boat 1 -->
 <g transform="translate(-100, 232)">
     <g class="boat-travel">
-		<g transform="scale(1.8)">
+		<g transform="scale(2.2)">
+			<g class="boat-bob">
+				<path class="wake" d="M -30,4 Q -60,10 -90,6 Q -60,2 -30,0 Z"/>
+				<path class="hull" d="M -24,0 C -16,13 16,13 24,0 Z"/>
+				<path class="deck" d="M -24,0 L 24,0 L 18,-3 L -18,-3 Z"/>
+				<line class="mast" x1="0" y1="-3" x2="0" y2="-58"/>
+				<path class="sail-main" d="M 2,-6 L 2,-54 L 22,-6 Z"/>
+				<text class="sail-number" x="9" y="-20">5</text>
+				<path class="sail-jib"  d="M -3,-10 L -3,-46 L -20,-10 Z"/>
+				<path class="flag" d="M 0,-58 L 10,-54 L 0,-50 Z"/>
+			</g>
+		</g>
+    </g>
+</g>
+<!-- boat 2 -->
+ <g transform="translate(-100, 232)">
+    <g class="boat-travel-2">
+		<g transform="scale(2.2)">
+			<g class="boat-bob">
+				<path class="wake" d="M -30,4 Q -60,10 -90,6 Q -60,2 -30,0 Z"/>
+				<path class="hull" d="M -24,0 C -16,13 16,13 24,0 Z"/>
+				<path class="deck" d="M -24,0 L 24,0 L 18,-3 L -18,-3 Z"/>
+				<line class="mast" x1="0" y1="-3" x2="0" y2="-58"/>
+				<path class="sail-main" d="M 2,-6 L 2,-54 L 22,-6 Z"/>
+				<text class="sail-number" x="9" y="-20">5</text>
+				<path class="sail-jib"  d="M -3,-10 L -3,-46 L -20,-10 Z"/>
+				<path class="flag" d="M 0,-58 L 10,-54 L 0,-50 Z"/>
+			</g>
+		</g>
+    </g>
+</g>
+<!-- boat 3 -->
+ <g transform="translate(-100, 232)">
+    <g class="boat-travel-3">
+		<g transform="scale(2.2)">
+			<g class="boat-bob">
+				<path class="wake" d="M -30,4 Q -60,10 -90,6 Q -60,2 -30,0 Z"/>
+				<path class="hull" d="M -24,0 C -16,13 16,13 24,0 Z"/>
+				<path class="deck" d="M -24,0 L 24,0 L 18,-3 L -18,-3 Z"/>
+				<line class="mast" x1="0" y1="-3" x2="0" y2="-58"/>
+				<path class="sail-main" d="M 2,-6 L 2,-54 L 22,-6 Z"/>
+				<text class="sail-number" x="9" y="-20">5</text>
+				<path class="sail-jib"  d="M -3,-10 L -3,-46 L -20,-10 Z"/>
+				<path class="flag" d="M 0,-58 L 10,-54 L 0,-50 Z"/>
+			</g>
+		</g>
+    </g>
+</g>
+<!-- Final boat -->
+ <g transform="translate(-100, 232)">
+    <g class="boat-travel-4">
+		<g transform="scale(2.2)">
 			<g class="boat-bob">
 				<path class="wake" d="M -30,4 Q -60,10 -90,6 Q -60,2 -30,0 Z"/>
 				<path class="hull" d="M -24,0 C -16,13 16,13 24,0 Z"/>
@@ -131,7 +211,7 @@
   </g>
 </g>
 <g id="People" transform="translate(370, 210)">
-	<g transform="scale(1.3)">
+	<g transform="scale(1.3,2)">
 		        <!-- two pointers: now relative to the people's own coordinates -->
         <g class="ptr-left" transform="translate(-75, -44)">
             <text class="ptr-arrow">↓</text>
@@ -160,7 +240,7 @@
 		</g>
 
 		<!-- weight 2 -->
-		<g transform="translate(-15, 0)">
+		<g id="firstWeight2" transform="translate(-15, 0)">
 			<g class="person" data-weight="2">
 				<circle cx="0" cy="-12.5" r="2.5"/>
 				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
@@ -169,7 +249,7 @@
 		</g>
 
 		<!-- weight 2 -->
-		<g transform="translate(15, 0)">
+		<g id="secondWeight2" transform="translate(15, 0)">
 			<g class="person" data-weight="2">
 				<circle cx="0" cy="-12.5" r="2.5"/>
 				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
@@ -179,7 +259,7 @@
 
 		<!-- weight 1 -->
 		<g transform="translate(45, 0)">
-			<g class="person" data-weight="1">
+			<g id = "penultimate-one" class="person" data-weight="1">
 				<circle cx="0" cy="-10.5" r="2.5"/>
 				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
 				<text class="person-weight" y="-16">1</text>
@@ -188,7 +268,7 @@
 
 		<!-- weight 1 -->
 		<g transform="translate(75, 0)">
-			<g class="person" data-weight="1">
+			<g id = "last-one" class="person" data-weight="1">
 				<circle cx="0" cy="-10.5" r="2.5"/>
 				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
 				<text class="person-weight" y="-16">1</text>
@@ -214,22 +294,22 @@
 
 
 
-			Reveal.initialize({
-				hash: true,
+			//Reveal.initialize({
+				///hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-			});
+				//plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			//});
 
 
-// Reveal.initialize({
-//     hash: true,
-//     width: 1080,
-//     height: 1350,        // Instagram carousel ratio (4:5)
-//     margin: 0.04,
-//     center: true,
-//     plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-// });
+Reveal.initialize({
+     hash: true,
+     width: 1080,
+     height: 1350,        // Instagram carousel ratio (4:5)
+     margin: 0.04,
+    center: true,
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+ });
 
 		</script>
 		<script >
