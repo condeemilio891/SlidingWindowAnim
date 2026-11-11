@@ -19,11 +19,11 @@
 <body>
 <div class="reveal">
     <div class="slides">
-        <section data-background-color="#D0F0FF">
+        <section data-background-color="#0a4a80">
             <div style="text-align: center;">		
 <div style="text-align: center;">
-  <h6>Rescue Boats Sorted</h6>
-  <h6>Two Pointers + Greedy</h6>
+  <h6>Boats to Save Sorted People</h6>
+  <h6>Two Pointers Greedy</h6>
 	<p class="limit-label">
 		<span class="pill">Time: O(n)</span>
 		<span class="pill">Boat weight limit: 5</span>
@@ -31,8 +31,10 @@
 		<span class="pill">Space: O(1)</span>
 	</p>
 </div>
-<svg class="sea" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="600px"
-   height="400px" viewBox="0 0 800 350" style="enable-background:new 0 0 800 400;" xml:space="preserve">
+<div class="scene">
+  <svg class="sea" version="1.1" xmlns="http://www.w3.org/2000/svg"
+       x="0px" y="0px" width="600px" height="400px"
+       viewBox="0 0 800 350" xml:space="preserve">
 
 <g id="Sky" class="sky">
   <radialGradient id="SVGID_1_" cx="400" cy="202.5" r="317.3423" gradientUnits="userSpaceOnUse">
@@ -41,7 +43,19 @@
     <stop  offset="0.5708" style="stop-color:#D5EBFE"/>
     <stop  offset="1" style="stop-color:#D0F0FF"/>
   </radialGradient>
-  <rect y="-1" class="st1" width="800" height="407"/>
+  <rect y="-100" class="st1" width="800" height="407"/>
+  <!-- boat label -->
+		<g id="BoatCounter" transform="translate(400, 75)">
+		<rect x="-120" y="-140" width="240" height="60" rx="30"
+				fill="rgba(255,255,255,0.8)" stroke="#0a4a80" stroke-width="2.5"/>
+		<text class="counter-label" x="-70" y="-111">Boats =</text>
+
+		<text class="counter-value v0" x="42" y="-111">0</text>
+		<text class="counter-value v1" x="42" y="-111">1</text>
+		<text class="counter-value v2" x="42" y="-111">2</text>
+		<text class="counter-value v3" x="42" y="-111">3</text>
+		<text class="counter-value v4" x="42" y="-111">4</text>
+		</g>
 </g>
 <g id="DarkWaves" class="DarkWaves">
   <g>
@@ -226,7 +240,10 @@
 			<g class="person" data-weight="5">
 				<circle cx="0" cy="-20.5" r="2.5"/>
 				<path d="M 0,-18 L 0,-5.75 M -3.5,-15 L 3.5,-15 M 0,-5.75 L -3,0 M 0,-5.75 L 3,0"/>
-				<text class="person-weight" y="-26">5</text>
+				<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">5</text>
+				</g>
 			</g>
 		</g>
 
@@ -235,7 +252,10 @@
 			<g class="person" data-weight="3">
 				<circle cx="0" cy="-15.5" r="2.5"/>
 				<path d="M 0,-13 L 0,-4.5 M -3.5,-12 L 3.5,-12 M 0,-4.5 L -3,0 M 0,-4.5 L 3,0"/>
-				<text class="person-weight" y="-21">3</text>
+					<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">3</text>
+				</g>
 			</g>
 		</g>
 
@@ -244,7 +264,10 @@
 			<g class="person" data-weight="2">
 				<circle cx="0" cy="-12.5" r="2.5"/>
 				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
-				<text class="person-weight" y="-18">2</text>
+				<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">2</text>
+				</g>
 			</g>
 		</g>
 
@@ -253,7 +276,10 @@
 			<g class="person" data-weight="2">
 				<circle cx="0" cy="-12.5" r="2.5"/>
 				<path d="M 0,-10 L 0,-3.75 M -3.5,-10 L 3.5,-10 M 0,-3.75 L -3,0 M 0,-3.75 L 3,0"/>
-				<text class="person-weight" y="-18">2</text>
+				<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">2</text>
+				</g>
 			</g>
 		</g>
 
@@ -262,7 +288,10 @@
 			<g id = "penultimate-one" class="person" data-weight="1">
 				<circle cx="0" cy="-10.5" r="2.5"/>
 				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
-				<text class="person-weight" y="-16">1</text>
+				<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">1</text>
+				</g>
 			</g>
 		</g>
 
@@ -271,13 +300,36 @@
 			<g id = "last-one" class="person" data-weight="1">
 				<circle cx="0" cy="-10.5" r="2.5"/>
 				<path d="M 0,-8 L 0,-3.25 M -3.5,-8.5 L 3.5,-8.5 M 0,-3.25 L -3,0 M 0,-3.25 L 3,0"/>
-				<text class="person-weight" y="-16">1</text>
+				<g class="weight-pill" transform="translate(0, -32) scale(1.2, 1.2)">
+					<rect class="weight-pill-bg" x="-8" y="-10.5" width="16" height="19" rx="6.5"/>
+					<text class="person-weight" y="0">1</text>
+				</g>
 			</g>
 		</g>
 	</g>	
 </g>
 
 </svg>
+
+  
+	<div class="water-code">
+  <div class="code-line" id="code-1">function boatsToSaveSortedPeople(people, limit) {</div>
+  <div class="code-line" id="code-2">&#9;let left = 0</div>
+  <div class="code-line" id="code-3">&#9;let right = people.length - 1</div>
+  <div class="code-line" id="code-4">&#9;let boats = 0;</div>
+  <div class="code-line" id="code-5">&nbsp;</div>
+  <div class="code-line" id="code-6">&#9;while (left &lt;= right) {</div>
+  <div class="code-line" id="code-7">&#9;&#9;if (people[left] + people[right] &lt;= limit) {</div>
+  <div class="code-line" id="code-8">&#9;&#9;&#9;right--;</div>
+  <div class="code-line" id="code-9">&#9;&#9;}</div>
+  <div class="code-line" id="code-10">&#9;&#9;left++;</div>
+  <div class="code-line" id="code-11">&#9;&#9;boats++;</div>
+  <div class="code-line" id="code-12">&#9;}</div>
+  <div class="code-line" id="code-13">&#9;return boats;</div>
+  <div class="code-line" id="code-14">}</div>
+</div>
+  
+</div>
        </div>
         
         </section>
@@ -294,12 +346,12 @@
 
 
 
-			//Reveal.initialize({
-				///hash: true,
+			// Reveal.initialize({
+			// 	hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				//plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-			//});
+			// 	//Learn about plugins: https://revealjs.com/plugins/
+			 	plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			// });
 
 
 Reveal.initialize({
@@ -321,13 +373,20 @@ Reveal.initialize({
 				root.classList.remove('playing');
 				void root.offsetWidth;        // force reflow so the browser sees the change
 				root.classList.add('playing');
+				
 				}
 
 				// Kick it off after Reveal has rendered the first slide
 				Reveal.on('ready', () => {
 				replay();
+				
 				//setInterval(replay, LOOP_MS); //NO REPLAY
+
 				});
+
+
+				
+
 
 		</script>
 	</body>
