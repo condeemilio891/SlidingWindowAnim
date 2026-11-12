@@ -136,24 +136,7 @@ h3 {
   66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
   67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
 }
-.limit-label {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
-    color: #D0F0FF;
-    letter-spacing: 0.03em;
-    margin-top: 0.5rem;
-}
 
-.limit-label .pill {
-    padding: 0.2em 0.9em;
-    border: 2px solid #D0F0FF;
-    border-radius: 999px;
-    background: rgba(10, 74, 128, 0.08);
-    line-height: 1.5;
-}
 #BoatCounter .counter-label {
   fill: #0a4a80;
   font-family: 'Open Sans', sans-serif;
@@ -186,14 +169,7 @@ h3 {
   border: 3px dashed #000;
 }
 
-.DarkWaves {
-    animation: darkwaves 10s ease-in-out infinite alternate;
-}
 
-@keyframes darkwaves {
-    0%   { transform: translate(-14px, -3px); }
-    100% { transform: translate(14px, 3px); }
-}
 
 .LightWaves {
     animation: lightwaves 7s ease-in-out infinite alternate;
@@ -204,14 +180,6 @@ h3 {
     100% { transform: translate(20px, -4px); }
 }
 
-.WhiteWaves {
-    animation: whitewaves 4s ease-in-out infinite alternate;
-}
-
-@keyframes whitewaves {
-    0%   { transform: translate(-28px, 8px); }
-    100% { transform: translate(28px, -2px); }
-}
 
 .st1 { fill: url(#SVGID_1_); }
 .st2 { fill: url(#SVGID_2_); }
@@ -222,145 +190,19 @@ h3 {
     stroke-width: 3;
     stroke-linecap: round;
 }
+.bar {
+  fill: #22d3ee;                     /* cyan — water theme */
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.5;
+  transition: fill 0.3s ease, opacity 0.3s ease;
+}
+.bar.active { fill: #ffd166; }
 
-/* horizontal travel */
-.boat-travel {
-    animation: boat-travel 14s linear forwards;
-}
-.boat-travel-2 {
-    animation: boat-travel 14s linear 8s forwards;
-}
-.boat-travel-3{
-    animation: boat-travel 14s linear 16s forwards;
-}
-.boat-travel-4{
-    animation: boat-travel 14s linear 24s forwards;
-}
-@keyframes boat-travel {
-    0%   { transform: translateX(-110px); }
-    54%  { transform: translateX(450px); }
-    70%  { transform: translateX(450px); }   /* hold until 70% instead of 64% */
-    100% { transform: translateX(1110px); }
-}
-
-
-.boat-bob {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: boat-bob 2.6s ease-in-out infinite alternate;
-}
-
-@keyframes boat-bob {
-    0%   { transform: translateY(-3px) rotate(-2.5deg); }
-    100% { transform: translateY(3px)  rotate(2.5deg); }
-}
-/* boat styling */
-.hull      { fill: #3b2a1e; }
-.deck      { fill: #8b5a2b; }
-.mast      { stroke: #2a1d14; stroke-width: 2; }
-.sail-main { fill: #f4f1e8; stroke: #c9c2b0; stroke-width: 0.8; }
-.sail-jib  { fill: #e8e2d3; stroke: #c9c2b0; stroke-width: 0.8; }
-.flag      { fill: #d94f4f; }
-.wake {
-    fill: rgba(255,255,255,0.55);
-    transform-box: fill-box;
-    transform-origin: right center;
-    animation: wake-fade 2.6s ease-out infinite;
-}
-.sail-number {
-    fill: white; 
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-anchor: middle;
-    dominant-baseline: central;
-}
-
-@keyframes wake-fade {
-    0%   { opacity: 0.7; transform: scaleX(0.4); }
-    100% { opacity: 0;   transform: scaleX(1.4); }
-}
-
-.palm {
-    transform-box: fill-box;
-    transform-origin: bottom center;
-    animation: palm-sway 5s ease-in-out infinite;
-}
-
-@keyframes palm-sway {
-    0%, 100% { transform: rotate(-2deg); }
-    50%      { transform: rotate(2deg); }
-}
-.person {
-    transform-origin: 0 0;
-    fill: none;
-    stroke: #2a1d14;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    /* animation: person-jump 2.4s ease-in-out infinite; */
-}
-
-
-.person circle {
-    fill: #2a1d14;
-    stroke: none;
-}
-
-/* weight badge — counter-scaled so it renders un-stretched */
-.weight-pill-bg {
-    fill: #ffffff;
-    stroke: #2a1d14;
-    stroke-width: 1.2;
-}
-
-.person-weight {
-  fill: #2a1d14;
-  font-family: 'Inter', 'Open Sans', system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  font-weight: 700;                /* ← the fix: 100 → 700 */
-  font-variant-numeric: tabular-nums;   /* all digits same width = cleaner */
-  text-anchor: middle;
-  dominant-baseline: middle;       /* ← 'middle' is more reliable than 'central' in SVG */
-  opacity: 1;
-}
-@keyframes person-jump {
-    0%,  45%, 100% { transform: translateY(0)     scaleY(1); }
-    8%             { transform: translateY(0)     scaleY(0.9); }   /* crouch */
-    22%            { transform: translateY(-16px) scaleY(1.06); }  /* rise */
-    34%            { transform: translateY(0)     scaleY(0.94); }  /* land */
-}
-.person[data-weight="5"]   { animation: person-board-5  14s ease-in-out forwards; }
-.person[data-weight="3"]   { animation: person-board-3  14s ease-in-out 8s forwards; }
-#last-one                  { animation: person-board-1  14s ease-in-out 8s forwards; }
-#firstWeight2 .person      { animation: person-board-3  14s ease-in-out 16s forwards; }
-#penultimate-one           { animation: person-board-1 14s ease-in-out 16s forwards; }
-#secondWeight2 .person     { animation: person-board-1 14s ease-in-out 24s forwards; }
-@keyframes person-board-5 {
-    0%, 54%  { transform: translate(0, 0) scaleY(1);          animation-timing-function: ease-in; }
-    56%      { transform: translate(0, 0) scaleY(0.85);       animation-timing-function: ease-out; }
-    60%      { transform: translate(30px, -25px) scaleY(1.1); animation-timing-function: ease-in; }
-    64%      { transform: translate(60px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
-    70%      { transform: translate(60px, 17px) scaleY(1);    animation-timing-function: linear; }
-    100%     { transform: translate(567.7px, 17px) scaleY(1); }
-}
-
-@keyframes person-board-3 {
-    0%, 54%  { transform: translate(0, 0) scaleY(1);            animation-timing-function: ease-in; }
-    56%      { transform: translate(0, 0) scaleY(0.85);         animation-timing-function: ease-out; }
-    60%      { transform: translate(18px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
-    64%      { transform: translate(36.5px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
-    70%      { transform: translate(36.5px, 17px) scaleY(1);    animation-timing-function: linear; }
-    100%     { transform: translate(544.2px, 17px) scaleY(1); }
-}
-
-@keyframes person-board-1 {
-    0%, 54%  { transform: translate(0, 0) scaleY(1);             animation-timing-function: ease-in; }
-    56%      { transform: translate(0, 0) scaleY(0.85);          animation-timing-function: ease-out; }
-    60%      { transform: translate(-28px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
-    64%      { transform: translate(-56px, 17px) scaleY(0.9);    animation-timing-function: ease-out; }
-    70%      { transform: translate(-56px, 17px) scaleY(1);      animation-timing-function: linear; }
-    100%     { transform: translate(451.7px, 17px) scaleY(1); }
+.baseline {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  stroke-linecap: round;
 }
 
 
@@ -373,8 +215,8 @@ h3 {
     animation: ptr-fade-in 30s ease-out forwards;
 }
 
-.ptr-left .ptr-arrow  { fill: #000080; }
-.ptr-right .ptr-arrow { fill: #000080; }
+.ptr-left .ptr-arrow  { fill: #2CFF05; }
+.ptr-right .ptr-arrow { fill: #FFED29; }
 .ptr-left {
     animation: ptr-left-move 30s ease-out forwards;
 }

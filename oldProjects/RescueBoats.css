@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css?family=Calligraffitti|Open+Sans');
+
+html, body {
+  height: 100%;
+  background-color: #D0F0FF;
+}
+
+h1 {
+  font-family: 'Calligraffitti';
+}
+
+h3 {
+  font-family: 'Open Sans';
+}
+
+.scene {
+  position: relative;
+  display: block;
+  width: 777px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.water-code {
+  position: absolute;
+  left: 50%;
+  bottom: -77%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 75%;
+  padding: 0.55em 1em;
+  background: rgba(0, 25, 60, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 20, 60, 0.35);
+  color: #4ade80;
+  font-family: 'Fira Code', 'JetBrains Mono', Menlo, monospace;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  text-align: left;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.water-code .code-line {
+  display: block;
+  min-height: 1.4em;
+  color: white;
+  white-space: pre;
+  padding: 0 6px;
+  margin-left: -6px;
+  border-radius: 4px;
+  transform-origin: left center;
+  will-change: transform, background-color, color;
+}
+
+/* don't run until the slide is showing (survives slide re-entry) */
+.water-code .code-line {
+  animation-play-state: paused;
+}
+.reveal .slides section.present .water-code .code-line {
+  animation-play-state: running;
+}
+
+/* which lines animate */
+#code-2, #code-3, #code-4        { animation: line-vars 40s linear forwards; }
+#code-6                          { animation: line-while-loop 40s linear forwards; }   /* ← renamed */
+#code-7, #code-8, #code-9, #code-12 { animation: line-body 40s linear forwards; }      /* ← added code-12 */
+#code-10, #code-11               { animation: line-inc-loop 40s linear forwards; }     /* ← renamed */
+#code-13                         { animation: line-return 40s linear forwards; }
+
+/* vars: 5–12.5%, pop at 8.75% */
+@keyframes line-vars {
+  0%, 5%        { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  8.75%         { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  12.5%         { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  14%, 100%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* while: 13.75–18%, pop at 16% */
+@keyframes line-while {
+  0%, 13.75%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  16%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  18%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  19.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* body: two windows — 38.9–46% and 58.9–66% */
+@keyframes line-body {
+  0%, 38.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* inc: 18.9–25%, pop at 22% */
+@keyframes line-inc {
+  0%, 18.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  22%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  25%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  26.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+@keyframes line-inc-loop {
+  0%, 18.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  22%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  25%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  26.5%, 38.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+/* return: 78.9–90%, pop at 84% */
+@keyframes line-return {
+  0%, 78.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  84%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  90%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  91.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+@keyframes line-while-loop {
+  0%, 13.75%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  16%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  18%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  19.5%, 38.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+.limit-label {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #D0F0FF;
+    letter-spacing: 0.03em;
+    margin-top: 0.5rem;
+}
+
+.limit-label .pill {
+    padding: 0.2em 0.9em;
+    border: 2px solid #D0F0FF;
+    border-radius: 999px;
+    background: rgba(10, 74, 128, 0.08);
+    line-height: 1.5;
+}
+#BoatCounter .counter-label {
+  fill: #0a4a80;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  dominant-baseline: middle;
+}
+#BoatCounter .counter-value {
+  fill: #0a4a80;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0;
+}
+#BoatCounter .v0 { opacity: 1; animation: tick-0 40s linear forwards; }
+#BoatCounter .v1 { animation: tick-1 40s linear forwards; }
+#BoatCounter .v2 { animation: tick-2 40s linear forwards; }
+#BoatCounter .v3 { animation: tick-3 40s linear forwards; }
+#BoatCounter .v4 { animation: tick-4 40s linear forwards; }
+
+/* master timeline = 40s (boats finish at 38s) */
+@keyframes tick-0 { 0%, 24.5%  { opacity: 1 } 24.6%, 100% { opacity: 0 } }
+@keyframes tick-1 { 0%, 24.5%  { opacity: 0 } 24.6%, 44.5% { opacity: 1 } 44.6%, 100% { opacity: 0 } }
+@keyframes tick-2 { 0%, 44.5%  { opacity: 0 } 44.6%, 64.5% { opacity: 1 } 64.6%, 100% { opacity: 0 } }
+@keyframes tick-3 { 0%, 64.5%  { opacity: 0 } 64.6%, 84.5% { opacity: 1 } 84.6%, 100% { opacity: 0 } }
+@keyframes tick-4 { 0%, 84.5%  { opacity: 0 } 84.6%, 100% { opacity: 1 } }
+.sea {
+  border: 3px dashed #000;
+}
+
+.DarkWaves {
+    animation: darkwaves 10s ease-in-out infinite alternate;
+}
+
+@keyframes darkwaves {
+    0%   { transform: translate(-14px, -3px); }
+    100% { transform: translate(14px, 3px); }
+}
+
+.LightWaves {
+    animation: lightwaves 7s ease-in-out infinite alternate;
+}
+
+@keyframes lightwaves {
+    0%   { transform: translate(-20px, 4px); }
+    100% { transform: translate(20px, -4px); }
+}
+
+.WhiteWaves {
+    animation: whitewaves 4s ease-in-out infinite alternate;
+}
+
+@keyframes whitewaves {
+    0%   { transform: translate(-28px, 8px); }
+    100% { transform: translate(28px, -2px); }
+}
+
+.st1 { fill: url(#SVGID_1_); }
+.st2 { fill: url(#SVGID_2_); }
+.st3 { fill: url(#SVGID_3_); }
+.st4 {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+/* horizontal travel */
+.boat-travel {
+    animation: boat-travel 14s linear forwards;
+}
+.boat-travel-2 {
+    animation: boat-travel 14s linear 8s forwards;
+}
+.boat-travel-3{
+    animation: boat-travel 14s linear 16s forwards;
+}
+.boat-travel-4{
+    animation: boat-travel 14s linear 24s forwards;
+}
+@keyframes boat-travel {
+    0%   { transform: translateX(-110px); }
+    54%  { transform: translateX(450px); }
+    70%  { transform: translateX(450px); }   /* hold until 70% instead of 64% */
+    100% { transform: translateX(1110px); }
+}
+
+
+.boat-bob {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: boat-bob 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes boat-bob {
+    0%   { transform: translateY(-3px) rotate(-2.5deg); }
+    100% { transform: translateY(3px)  rotate(2.5deg); }
+}
+/* boat styling */
+.hull      { fill: #3b2a1e; }
+.deck      { fill: #8b5a2b; }
+.mast      { stroke: #2a1d14; stroke-width: 2; }
+.sail-main { fill: #f4f1e8; stroke: #c9c2b0; stroke-width: 0.8; }
+.sail-jib  { fill: #e8e2d3; stroke: #c9c2b0; stroke-width: 0.8; }
+.flag      { fill: #d94f4f; }
+.wake {
+    fill: rgba(255,255,255,0.55);
+    transform-box: fill-box;
+    transform-origin: right center;
+    animation: wake-fade 2.6s ease-out infinite;
+}
+.sail-number {
+    fill: white; 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+@keyframes wake-fade {
+    0%   { opacity: 0.7; transform: scaleX(0.4); }
+    100% { opacity: 0;   transform: scaleX(1.4); }
+}
+
+.palm {
+    transform-box: fill-box;
+    transform-origin: bottom center;
+    animation: palm-sway 5s ease-in-out infinite;
+}
+
+@keyframes palm-sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50%      { transform: rotate(2deg); }
+}
+.person {
+    transform-origin: 0 0;
+    fill: none;
+    stroke: #2a1d14;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* animation: person-jump 2.4s ease-in-out infinite; */
+}
+
+
+.person circle {
+    fill: #2a1d14;
+    stroke: none;
+}
+
+/* weight badge — counter-scaled so it renders un-stretched */
+.weight-pill-bg {
+    fill: #ffffff;
+    stroke: #2a1d14;
+    stroke-width: 1.2;
+}
+
+.person-weight {
+  fill: #2a1d14;
+  font-family: 'Inter', 'Open Sans', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;                /* ← the fix: 100 → 700 */
+  font-variant-numeric: tabular-nums;   /* all digits same width = cleaner */
+  text-anchor: middle;
+  dominant-baseline: middle;       /* ← 'middle' is more reliable than 'central' in SVG */
+  opacity: 1;
+}
+@keyframes person-jump {
+    0%,  45%, 100% { transform: translateY(0)     scaleY(1); }
+    8%             { transform: translateY(0)     scaleY(0.9); }   /* crouch */
+    22%            { transform: translateY(-16px) scaleY(1.06); }  /* rise */
+    34%            { transform: translateY(0)     scaleY(0.94); }  /* land */
+}
+.person[data-weight="5"]   { animation: person-board-5  14s ease-in-out forwards; }
+.person[data-weight="3"]   { animation: person-board-3  14s ease-in-out 8s forwards; }
+#last-one                  { animation: person-board-1  14s ease-in-out 8s forwards; }
+#firstWeight2 .person      { animation: person-board-3  14s ease-in-out 16s forwards; }
+#penultimate-one           { animation: person-board-1 14s ease-in-out 16s forwards; }
+#secondWeight2 .person     { animation: person-board-1 14s ease-in-out 24s forwards; }
+@keyframes person-board-5 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);          animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);       animation-timing-function: ease-out; }
+    60%      { transform: translate(30px, -25px) scaleY(1.1); animation-timing-function: ease-in; }
+    64%      { transform: translate(60px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
+    70%      { transform: translate(60px, 17px) scaleY(1);    animation-timing-function: linear; }
+    100%     { transform: translate(567.7px, 17px) scaleY(1); }
+}
+
+@keyframes person-board-3 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);            animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);         animation-timing-function: ease-out; }
+    60%      { transform: translate(18px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
+    64%      { transform: translate(36.5px, 17px) scaleY(0.9);  animation-timing-function: ease-out; }
+    70%      { transform: translate(36.5px, 17px) scaleY(1);    animation-timing-function: linear; }
+    100%     { transform: translate(544.2px, 17px) scaleY(1); }
+}
+
+@keyframes person-board-1 {
+    0%, 54%  { transform: translate(0, 0) scaleY(1);             animation-timing-function: ease-in; }
+    56%      { transform: translate(0, 0) scaleY(0.85);          animation-timing-function: ease-out; }
+    60%      { transform: translate(-28px, -25px) scaleY(1.1);   animation-timing-function: ease-in; }
+    64%      { transform: translate(-56px, 17px) scaleY(0.9);    animation-timing-function: ease-out; }
+    70%      { transform: translate(-56px, 17px) scaleY(1);      animation-timing-function: linear; }
+    100%     { transform: translate(451.7px, 17px) scaleY(1); }
+}
+
+
+.ptr-arrow {
+    font-size: 55px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+        opacity: 0;
+    animation: ptr-fade-in 30s ease-out forwards;
+}
+
+.ptr-left .ptr-arrow  { fill: #000080; }
+.ptr-right .ptr-arrow { fill: #000080; }
+.ptr-left {
+    animation: ptr-left-move 30s ease-out forwards;
+}
+
+.ptr-right {
+    animation: ptr-right-move 30s ease-out forwards;
+}
+@keyframes ptr-left-move {
+    0%, 30%  { transform: translate(-75px, -64px); }
+    32%      { transform: translate(-45px, -64px); }
+    58%      { transform: translate(-45px, -64px); }
+    60%      { transform: translate(-15px, -64px); }
+    84%      { transform: translate(-15px, -64px); }
+    86%      { transform: translate(15px, -64px) scale(1.35); }   
+    100%     { transform: translate(15px, -64px) scale(1); }
+}
+
+
+@keyframes ptr-right-move {
+    0%, 58%  { transform: translate(75px, -64px); }
+    60%      { transform: translate(45px, -64px); }
+    84%      { transform: translate(45px, -64px); }
+    86%      { transform: translate(15px, -64px) scale(1.35); }
+    100%     { transform: translate(15px, -64px) scale(1); }
+}
+
+@keyframes ptr-fade-in {
+    0%, 3%   { opacity: 0; transform: translateY(-10px); }  /* hover above */
+    18.33%    { opacity: 1; transform: translateY(0); }       /* settle onto person */
+    100%      { opacity: 1; transform: translateY(0); }
+}
+
+.fish {
+    fill: #1a5a99;
+    opacity: 0.55;
+}
+
+.fish-1 { animation: fish-swim-right 16s linear infinite; }
+.fish-2 { animation: fish-swim-right 22s linear infinite; }
+.fish-3 { animation: fish-swim-left  19s linear infinite; }
+.fish-4 { animation: fish-swim-left  25s linear infinite; }
+
+@keyframes fish-swim-right {
+    0%   { transform: translate(120px, 280px); }
+    100% { transform: translate(900px, 280px); }
+}
+
+@keyframes fish-swim-left {
+    0%   { transform: translate(680px, 265px); }
+    100% { transform: translate(-100px, 265px); }
+}
+
+.fish-3 { animation-name: fish-swim-left-alt; }
+@keyframes fish-swim-left-alt {
+    0%   { transform: translate(680px, 265px); }
+    100% { transform: translate(-100px, 265px); }
+}
+
+.fish-4 { animation-name: fish-swim-left-alt-2; }
+@keyframes fish-swim-left-alt-2 {
+    0%   { transform: translate(280px, 318px); }
+    100% { transform: translate(-100px, 318px); }
+}
