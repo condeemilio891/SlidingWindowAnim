@@ -12,7 +12,154 @@ h1 {
 h3 {
   font-family: 'Open Sans';
 }
+.sea {
+  border: 3px dashed #000;
+}
 
+
+
+/* .LightWaves {
+    animation: lightwaves 7s ease-in-out infinite alternate;
+    
+} */
+
+@keyframes lightwaves {
+    0%   { transform: translate(-20px, 4px) ; }
+    100% { transform: translate(20px, -4px); }
+}
+
+#LightWaves .wave-shrink {
+  transform-box: fill-box;
+  transform-origin: center top;    /* center-x of wave bbox, top edge */
+  animation: wave-collapse 30s ease-in-out forwards;
+}
+
+@keyframes wave-collapse {
+  /* bar 0 ↔ bar 8, height 1, area 8 */
+  0%, 11%   {
+    transform: translateY(-2px) translateX(-8.7px)
+    scale(.76, 1);
+  }
+  /* collapsed initial: height 1, width 8 (bar 0 to bar 8) — thin line */
+  13%       {
+    transform: translateY(190px) translateX(-10px) scale(.76, .3);
+  }
+
+  /* after L moves to bar 1: height 7, width 7 — area 49 (max!) */
+  15%, 20%  {
+    transform: translateY(70px) translateX(33px) scale(.70, 1);
+  }
+
+  /* after R moves to bar 7: height 3, width 6 — area 18 */
+   22%, 27%  {
+    transform: translateY(140px) translateX(-25px) scale(0.6, 1);
+  }
+
+  /* after R moves to bar 6: height 8, width 5 — area 40 */
+   29%, 34%  {
+    transform: translateY(70px) translateX(-50px) scale(0.5, 1);
+  } 
+
+  /* after R moves to bar 5: height 4, width 4 — area 16 */
+  36%, 41%  {
+    transform: translateY(140px) translateX(-100px) scale(0.40, 1);
+  }
+
+  /* after R moves to bar 4: height 5, width 3 — area 15 */
+   43%, 48%  {
+    transform: translateY(120px) translateX(-140px) scale(0.30, 1);
+  } 
+
+  /* after R moves to bar 3: height 2, width 2 — area 4 */
+   50%, 55%  {
+    transform: translateY(180px) translateX(-180px) scale(0.2, 1);
+  } 
+
+  /* after R moves to bar 2: height 6, width 1 — area 6 */
+   57%, 62%  {
+    transform: translateY(110px) translateX(-240px) scale(0.1, 1);
+  } 
+
+  /* R meets L at bar 1: width 0 — invisible */
+  64%, 100% {
+    transform: translateY(70px) translateX(33px) scale(.70, 1);
+  } 
+}
+
+.st1 { fill: url(#SVGID_1_); }
+.st2 { fill: url(#SVGID_2_); }
+.st3 { fill: url(#SVGID_3_); }
+.st4 {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+
+
+
+
+.ptr-arrow {
+    font-size: 55px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.ptr-left .ptr-arrow  { fill: #96e6a1; }
+.ptr-right .ptr-arrow { fill: #ffd166; }
+.ptr-left {
+    animation: ptr-left-move 30s ease-out forwards;
+}
+
+.ptr-right {
+    animation: ptr-right-move 30s ease-out forwards;
+}
+/* left pointer path: bar0 → bar1 → … (moves right only when left's bar is shorter) */
+@keyframes ptr-left-move {
+  0%, 30%   { transform: translate(-268px, -10px); }   /* bar 0 */
+  32%       { transform: translate(-268px, -10px); }
+  34%       { transform: translate(-198px, -10px); }   /* bar 1 */
+  84%       { transform: translate(-198px, -10px); }
+  100%      { transform: translate(-198px, -10px); }
+}
+
+/* right pointer path: bar8 → bar7 → bar6 … down to bar1 */
+/* left pointer: bar0 → bar1, then stays. */
+/* left pointer: bar0 → bar1, then stays. */
+@keyframes ptr-left-move {
+  0%, 13%      { transform: translate(-268px, -10px); }   /* bar 0 — parked */
+  15%, 100%    { transform: translate(-198px, -10px); }   /* bar 1 — stays through end */
+}
+
+/* right pointer: bar8 → bar7 → bar6 → bar5 → bar4 → bar3 → bar2 → bar1.
+   Each step: ~2% travel (~0.6s), ~5% parked (~1.5s). */
+@keyframes ptr-right-move {
+  0%, 20%      { transform: translate( 292px, -10px); }   /* bar 8 — parked */
+  22%, 27%     { transform: translate( 222px, -10px); }   /* bar 7 — parked */
+  29%, 34%     { transform: translate( 152px, -10px); }   /* bar 6 — parked */
+  36%, 41%     { transform: translate(  82px, -10px); }   /* bar 5 — parked */
+  43%, 48%     { transform: translate(  12px, -10px); }   /* bar 4 — parked */
+  50%, 55%     { transform: translate( -58px, -10px); }   /* bar 3 — parked */
+  57%, 62%     { transform: translate(-128px, -10px); }   /* bar 2 — parked */
+  64%, 100%    { transform: translate(-198px, -10px); }   /* bar 1 — meets left */
+}
+
+/* right pointer: bar8 → bar7 → bar6 → bar5 → bar4 → bar3 → bar2 → bar1.
+   Each step: ~2% travel (~0.6s), ~5% parked (~1.5s). */
+@keyframes ptr-right-move {
+  0%, 20%      { transform: translate( 292px, -10px); }   /* bar 8 — parked */
+  22%, 27%     { transform: translate( 222px, -10px); }   /* bar 7 — parked */
+  29%, 34%     { transform: translate( 152px, -10px); }   /* bar 6 — parked */
+  36%, 41%     { transform: translate(  82px, -10px); }   /* bar 5 — parked */
+  43%, 48%     { transform: translate(  12px, -10px); }   /* bar 4 — parked */
+  50%, 55%     { transform: translate( -58px, -10px); }   /* bar 3 — parked */
+  57%, 62%     { transform: translate(-128px, -10px); }   /* bar 2 — parked */
+  64%, 100%    { transform: translate(-198px, -10px); }   /* bar 1 — meets left */
+}
+
+/* ─── scene + water-code panel ─── */
 .scene {
   position: relative;
   display: block;
@@ -24,18 +171,17 @@ h3 {
 .water-code {
   position: absolute;
   left: 50%;
-  bottom: -77%;
+  bottom: -110%;
   transform: translateX(-50%);
-  margin: 0;
-  width: 75%;
+  width: 85%;
   padding: 0.55em 1em;
+  margin: 0;
   background: rgba(0, 25, 60, 0.72);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 2px solid rgba(255, 255, 255, 0.28);
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(0, 20, 60, 0.35);
-  color: #4ade80;
   font-family: 'Fira Code', 'JetBrains Mono', Menlo, monospace;
   font-size: 1.05rem;
   line-height: 1.4;
@@ -53,99 +199,83 @@ h3 {
   margin-left: -6px;
   border-radius: 4px;
   transform-origin: left center;
-  will-change: transform, background-color, color;
-}
-
-/* don't run until the slide is showing (survives slide re-entry) */
-.water-code .code-line {
   animation-play-state: paused;
 }
+
 .reveal .slides section.present .water-code .code-line {
   animation-play-state: running;
 }
 
-/* which lines animate */
-#code-2, #code-3, #code-4        { animation: line-vars 40s linear forwards; }
-#code-6                          { animation: line-while-loop 40s linear forwards; }   /* ← renamed */
-#code-7, #code-8, #code-9, #code-12 { animation: line-body 40s linear forwards; }      /* ← added code-12 */
-#code-10, #code-11               { animation: line-inc-loop 40s linear forwards; }     /* ← renamed */
-#code-13                         { animation: line-return 40s linear forwards; }
 
-/* vars: 5–12.5%, pop at 8.75% */
-@keyframes line-vars {
-  0%, 5%        { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  8.75%         { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  12.5%         { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  14%, 100%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+
+
+
+/* ─── pointer fade-in (missing from your trimmed file) ─── */
+@keyframes ptr-fade-in {
+  0%, 3%    { opacity: 0; transform: translateY(-10px); }
+  12%       { opacity: 1; transform: translateY(0); }
+  100%      { opacity: 1; transform: translateY(0); }
 }
 
-/* while: 13.75–18%, pop at 16% */
-@keyframes line-while {
-  0%, 13.75%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  16%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  18%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  19.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+.ptr-arrow {
+  opacity: 0;
+  animation: ptr-fade-in 30s ease-out forwards;
 }
 
-/* body: two windows — 38.9–46% and 58.9–66% */
-@keyframes line-body {
-  0%, 38.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+/* ─── bar + baseline ─── */
+.bar {
+  fill: black;
+  stroke: rgba(255,255,255,0.55);
+  stroke-width: 1.5;
+  transition: fill 0.3s ease, opacity 0.3s ease;
+}
+.bar.active { fill: #ffd166; }
+.bar-label {
+  fill: white;                    /* dark blue — reads on cyan fill */
+  font-family: 'Inter', 'Open Sans', system-ui, sans-serif;
+  font-size: 15px;                   /* was 14 — needs to fit inside 24-wide bar */
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+.baseline {
+  stroke: rgba(255,255,255,0.35);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  stroke-linecap: round;
 }
 
-/* inc: 18.9–25%, pop at 22% */
-@keyframes line-inc {
-  0%, 18.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  22%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  25%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  26.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+/* ─── fish ─── */
+.fish { fill: #1a5a99; opacity: 0.55; }
+.fish-1 { animation: fish-swim-right 16s linear infinite; }
+.fish-2 { animation: fish-swim-right 22s linear infinite; }
+.fish-3 { animation: fish-swim-left 19s linear infinite; }
+.fish-4 { animation: fish-swim-left 25s linear infinite; }
+
+@keyframes fish-swim-right {
+  0%   { transform: translate(120px, 280px); }
+  100% { transform: translate(900px, 280px); }
 }
-@keyframes line-inc-loop {
-  0%, 18.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  22%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  25%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  26.5%, 38.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-}
-/* return: 78.9–90%, pop at 84% */
-@keyframes line-return {
-  0%, 78.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  84%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  90%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  91.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-}
-@keyframes line-while-loop {
-  0%, 13.75%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  16%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  18%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  19.5%, 38.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  42%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  46%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  47.5%, 58.9%  { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
-  62%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  66%           { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
-  67.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+@keyframes fish-swim-left {
+  0%   { transform: translate(680px, 265px); }
+  100% { transform: translate(-100px, 265px); }
 }
 
-#BoatCounter .counter-label {
+/* ─── counters (maxArea + currArea) ─── */
+#maxAreaCounter .counter-label,
+#currAreaCounter .counter-label {
   fill: #0a4a80;
   font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   font-weight: 600;
   dominant-baseline: middle;
 }
-#BoatCounter .counter-value {
-  fill: #0a4a80;
+
+/* All counter values hidden by default */
+.max-value{
+    fill: #341539;
   font-family: 'Open Sans', sans-serif;
   font-size: 36px;
   font-weight: 800;
@@ -153,130 +283,204 @@ h3 {
   dominant-baseline: middle;
   opacity: 0;
 }
-#BoatCounter .v0 { opacity: 1; animation: tick-0 40s linear forwards; }
-#BoatCounter .v1 { animation: tick-1 40s linear forwards; }
-#BoatCounter .v2 { animation: tick-2 40s linear forwards; }
-#BoatCounter .v3 { animation: tick-3 40s linear forwards; }
-#BoatCounter .v4 { animation: tick-4 40s linear forwards; }
 
-/* master timeline = 40s (boats finish at 38s) */
-@keyframes tick-0 { 0%, 24.5%  { opacity: 1 } 24.6%, 100% { opacity: 0 } }
-@keyframes tick-1 { 0%, 24.5%  { opacity: 0 } 24.6%, 44.5% { opacity: 1 } 44.6%, 100% { opacity: 0 } }
-@keyframes tick-2 { 0%, 44.5%  { opacity: 0 } 44.6%, 64.5% { opacity: 1 } 64.6%, 100% { opacity: 0 } }
-@keyframes tick-3 { 0%, 64.5%  { opacity: 0 } 64.6%, 84.5% { opacity: 1 } 84.6%, 100% { opacity: 0 } }
-@keyframes tick-4 { 0%, 84.5%  { opacity: 0 } 84.6%, 100% { opacity: 1 } }
-.sea {
-  border: 3px dashed #000;
+.curr-value {
+  fill: #111184;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0;
 }
 
-
-
-.LightWaves {
-    animation: lightwaves 7s ease-in-out infinite alternate;
+/* don't animate until slide is showing */
+.max-value,
+.curr-value {
+  animation-play-state: paused;
+}
+.reveal .slides section.present .max-value,
+.reveal .slides section.present .curr-value {
+  animation-play-state: running;
 }
 
-@keyframes lightwaves {
-    0%   { transform: translate(-20px, 4px); }
-    100% { transform: translate(20px, -4px); }
+/* ─── MAX counter: 0 → 8 → 49, holds ─── */
+.max-0  { animation: max-0-show  30s linear forwards; }
+.max-8  { animation: max-8-show  30s linear forwards; }
+.max-49 {
+  animation:
+    max-49-show 30s linear forwards,
+    max-49-flash 30s linear forwards;
 }
 
-
-.st1 { fill: url(#SVGID_1_); }
-.st2 { fill: url(#SVGID_2_); }
-.st3 { fill: url(#SVGID_3_); }
-.st4 {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 3;
-    stroke-linecap: round;
+@keyframes max-0-show {
+  0%, 12.99%   { opacity: 1; }
+  13%, 100%    { opacity: 0; }
 }
-.bar {
-  fill: #22d3ee;                     /* cyan — water theme */
-  stroke: rgba(255, 255, 255, 0.55);
-  stroke-width: 1.5;
-  transition: fill 0.3s ease, opacity 0.3s ease;
+@keyframes max-8-show {
+  0%, 12.99%   { opacity: 0; }
+  13%, 14.99%  { opacity: 1; }
+  15%, 100%    { opacity: 0; }
 }
-.bar.active { fill: #ffd166; }
-
-.baseline {
-  stroke: rgba(255, 255, 255, 0.35);
-  stroke-width: 2;
-  stroke-dasharray: 4 6;
-  stroke-linecap: round;
+@keyframes max-49-show {
+  0%, 14.99%   { opacity: 0; }
+  15%, 92.99%  { opacity: 1; }
+  /* flash: dim, bright, dim, bright, hold */
+  93%          { opacity: 0.3; }
+  94%          { opacity: 1; }
+  95%          { opacity: 0.3; }
+  96%          { opacity: 1; }
+  97%, 100%    { opacity: 1; }
 }
-
-
-.ptr-arrow {
-    font-size: 55px;
-    font-weight: 700;
-    text-anchor: middle;
-    dominant-baseline: central;
-        opacity: 0;
-    animation: ptr-fade-in 30s ease-out forwards;
+@keyframes max-49-flash {
+  0%, 92.99%  { fill: #0a4a80; font-size: 36px; }
+  93%         { fill: #0a4a80; font-size: 36px; }
+  94%         { fill: #ffd166; font-size: 44px; }
+  95%         { fill: #0a4a80; font-size: 36px; }
+  96%         { fill: #ffd166; font-size: 44px; }
+  97%, 100%   { fill: #0a4a80; font-size: 36px; }
 }
+/* ─── CURR counter: 0 → 8 → 49 → 18 → 40 → 16 → 15 → 4 → 6 → 0, holds ─── */
+.curr-0  { animation: curr-0-show  30s linear forwards; }
+.curr-8  { animation: curr-8-show  30s linear forwards; }
+.curr-49 { animation: curr-49-show 30s linear forwards; }
+.curr-18 { animation: curr-18-show 30s linear forwards; }
+.curr-40 { animation: curr-40-show 30s linear forwards; }
+.curr-16 { animation: curr-16-show 30s linear forwards; }
+.curr-15 { animation: curr-15-show 30s linear forwards; }
+.curr-4  { animation: curr-4-show  30s linear forwards; }
+.curr-6  { animation: curr-6-show  30s linear forwards; }
 
-.ptr-left .ptr-arrow  { fill: #2CFF05; }
-.ptr-right .ptr-arrow { fill: #FFED29; }
-.ptr-left {
-    animation: ptr-left-move 30s ease-out forwards;
+@keyframes curr-0-show {
+  0%, 12.99%   { opacity: 1; }
+  13%, 63.99%  { opacity: 0; }
+  64%, 100%    { opacity: 1; }
 }
-
-.ptr-right {
-    animation: ptr-right-move 30s ease-out forwards;
+@keyframes curr-8-show {
+  0%, 12.99%   { opacity: 0; }
+  13%, 14.99%  { opacity: 1; }
+  15%, 100%    { opacity: 0; }
 }
-@keyframes ptr-left-move {
-    0%, 30%  { transform: translate(-75px, -64px); }
-    32%      { transform: translate(-45px, -64px); }
-    58%      { transform: translate(-45px, -64px); }
-    60%      { transform: translate(-15px, -64px); }
-    84%      { transform: translate(-15px, -64px); }
-    86%      { transform: translate(15px, -64px) scale(1.35); }   
-    100%     { transform: translate(15px, -64px) scale(1); }
+@keyframes curr-49-show {
+  0%, 14.99%   { opacity: 0; }
+  15%, 21.99%  { opacity: 1; }
+  22%, 100%    { opacity: 0; }
 }
-
-
-@keyframes ptr-right-move {
-    0%, 58%  { transform: translate(75px, -64px); }
-    60%      { transform: translate(45px, -64px); }
-    84%      { transform: translate(45px, -64px); }
-    86%      { transform: translate(15px, -64px) scale(1.35); }
-    100%     { transform: translate(15px, -64px) scale(1); }
+@keyframes curr-18-show {
+  0%, 21.99%   { opacity: 0; }
+  22%, 28.99%  { opacity: 1; }
+  29%, 100%    { opacity: 0; }
 }
-
-@keyframes ptr-fade-in {
-    0%, 3%   { opacity: 0; transform: translateY(-10px); }  /* hover above */
-    18.33%    { opacity: 1; transform: translateY(0); }       /* settle onto person */
-    100%      { opacity: 1; transform: translateY(0); }
+@keyframes curr-40-show {
+  0%, 28.99%   { opacity: 0; }
+  29%, 35.99%  { opacity: 1; }
+  36%, 100%    { opacity: 0; }
 }
-
-.fish {
-    fill: #1a5a99;
-    opacity: 0.55;
+@keyframes curr-16-show {
+  0%, 35.99%   { opacity: 0; }
+  36%, 42.99%  { opacity: 1; }
+  43%, 100%    { opacity: 0; }
 }
-
-.fish-1 { animation: fish-swim-right 16s linear infinite; }
-.fish-2 { animation: fish-swim-right 22s linear infinite; }
-.fish-3 { animation: fish-swim-left  19s linear infinite; }
-.fish-4 { animation: fish-swim-left  25s linear infinite; }
-
-@keyframes fish-swim-right {
-    0%   { transform: translate(120px, 280px); }
-    100% { transform: translate(900px, 280px); }
+@keyframes curr-15-show {
+  0%, 42.99%   { opacity: 0; }
+  43%, 49.99%  { opacity: 1; }
+  50%, 100%    { opacity: 0; }
 }
-
-@keyframes fish-swim-left {
-    0%   { transform: translate(680px, 265px); }
-    100% { transform: translate(-100px, 265px); }
+@keyframes curr-4-show {
+  0%, 49.99%   { opacity: 0; }
+  50%, 56.99%  { opacity: 1; }
+  57%, 100%    { opacity: 0; }
+}
+@keyframes curr-6-show {
+  0%, 56.99%   { opacity: 0; }
+  57%, 63.99%  { opacity: 1; }
+  64%, 100%    { opacity: 0; }
 }
 
-.fish-3 { animation-name: fish-swim-left-alt; }
-@keyframes fish-swim-left-alt {
-    0%   { transform: translate(680px, 265px); }
-    100% { transform: translate(-100px, 265px); }
+/* ─── limit pills ─── */
+.limit-label {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  color: #D0F0FF;
+  letter-spacing: 0.03em;
+  margin-top: 0.5rem;
 }
 
-.fish-4 { animation-name: fish-swim-left-alt-2; }
-@keyframes fish-swim-left-alt-2 {
-    0%   { transform: translate(280px, 318px); }
-    100% { transform: translate(-100px, 318px); }
+.limit-label .pill {
+  padding: 0.2em 0.9em;
+  border: 2px solid #D0F0FF;
+  border-radius: 999px;
+  background: rgba(10, 74, 128, 0.08);
+  line-height: 1.5;
+}
+/* ─── selectors ─── */
+#code-2, #code-3, #code-4    { animation: line-vars 30s linear forwards; }
+#code-7, #code-8, #code-9,
+#code-10                     { animation: line-calc 30s linear forwards; }
+#code-12, #code-13           { animation: line-left 30s linear forwards; }
+#code-15                     { animation: line-right 30s linear forwards; }
+#code-18                     { animation: line-return 30s linear forwards; }
+
+/* ─── vars: setup ─── */
+@keyframes line-vars {
+  0%, 6.7%      { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  8%, 12%       { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  13.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* ─── calc: rides alongside each move ─── */
+@keyframes line-calc {
+  0%, 6.7%      { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  8%, 15%       { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  16.5%, 20%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  20.5%, 22%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  23.5%, 27%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  27.5%, 29%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  30.5%, 34%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  34.5%, 36%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  37.5%, 41%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  41.5%, 43%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  44.5%, 48%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  48.5%, 50%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  51.5%, 55%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  55.5%, 57%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  58.5%, 62%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  62.5%, 64%    { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  65.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* ─── left: only fires at the single left move (13–15.5%) ─── */
+@keyframes line-left {
+  0%, 12.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  13%, 15.5%    { color: #4ade80; background-color: rgba(74,222,128,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(74,222,128,0.8); }
+  17%, 100%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* ─── right: 8 quick blips, each 2.5% wide (move + 0.5% tail) ─── */
+@keyframes line-right {
+  0%, 19.9%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  20%, 22.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  24%, 26.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  27%, 29.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  31%, 33.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  34%, 36.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  38%, 40.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  41%, 43.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  45%, 47.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  48%, 50.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  52%, 54.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  55%, 57.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  59%, 61.9%    { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  62%, 64.5%    { color: #ffd166; background-color: rgba(255,209,102,0.22); transform: scale(1.05); text-shadow: 0 0 12px rgba(255,209,102,0.8); }
+  66%, 100%     { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+}
+
+/* ─── return ─── */
+@keyframes line-return {
+  0%, 89%       { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
+  90%, 96%      { color: #4ade80; background-color: rgba(74,222,128,0.18); transform: scale(1.04); text-shadow: 0 0 10px rgba(74,222,128,0.7); }
+  97.5%, 100%   { color: white; background-color: transparent; transform: scale(1); text-shadow: none; }
 }
